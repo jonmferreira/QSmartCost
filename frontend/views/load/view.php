@@ -21,7 +21,7 @@ $this->params['breadcrumbs'][] = $model->item;
 				</div>
 				<div class="col-md-6" align="right">
 					<!--<button type="button" class="btn btn-success" style="border-radius: 10px" onclick="document.getElementById('id01').style.display='block'" >Cálculo de Resistência</button>-->
-					<a target="_blank" href="http://10.193.236.88:85/QSmart/advanced/frontend/web/index.php?r=qualidade%2Fview&id=<?= $model->item ?>">
+					<a target="_blank" href="http://10.193.236.67:85/QSmart/advanced/frontend/web/index.php?r=qualidade%2Fview&id=<?= $model->item ?>">
 						<button type="button" class="btn btn-warning" style="border-radius: 10px">Digital History Card</button>
 					</a>
 				</div>

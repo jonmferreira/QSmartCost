@@ -45,12 +45,15 @@ use yii\helpers\Html;
 // prepare menu items, get all modules
 $menuItems = [];
 
+
 $favouriteMenuItems[] = ['label'=>'MAIN NAVIGATION', 'options'=>['class'=>'header']];
 $developerMenuItems = [];
 
 foreach (\dmstr\helpers\Metadata::getModules() as $name => $module) {
     $role                        = $name;
 
+	
+	
     $defaultItem = [
         'icon' => 'fa fa-cube',
         'label'   => $name,
