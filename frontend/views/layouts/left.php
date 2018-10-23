@@ -56,6 +56,8 @@ if(Yii::$app->user->isGuest){
                             //['label' => 'MWO', 'icon' => 'fa fa-info-circle', 'url' => ['/nw8control/index']],
                         ],
                     ],
+					
+                    ['label' => 'RAC', 'icon' => 'fa fa-info-circle', 'url' => ['/inspectionscontrol/index']],
 					[
                         'label' => 'Energy Test Monitoring',
                         'icon' => 'fa fa-reorder',
@@ -65,6 +67,16 @@ if(Yii::$app->user->isGuest){
                             ['label' => 'Input', 'icon' => 'fa fa-info-circle', 'url' => ['/calc-z-testes/index']],
                             ['label' => 'Monitoring', 'icon' => 'fa fa-info-circle', 'url' => ['/calc-z-testes/zcalc']],
                         ],
+                    ],
+					[
+                        'label' => 'Teste',
+                        'icon' => 'fa fa-reorder',
+                        'url' => ['/teste2/index'],
+                        // 'items' => [
+                            // ['label' => 'Register', 'icon' => 'fa fa-info-circle', 'url' => ['/calc-z-config/index']],
+                            // ['label' => 'Input', 'icon' => 'fa fa-info-circle', 'url' => ['/calc-z-testes/index']],
+                            // ['label' => 'Monitoring', 'icon' => 'fa fa-info-circle', 'url' => ['/calc-z-testes/zcalc']],
+                        // ],
                     ],
                     //['label' => 'Line Audit', 'icon' => 'fa fa-check-square-o', 'url' => ['/line-audit-auditoria/index']],
 					//['label' => 'Load ON', 'icon' => 'fa fa-line-chart', 'url' => ['/site/loadon']],
