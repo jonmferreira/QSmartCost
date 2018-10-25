@@ -24,7 +24,7 @@ if(Yii::$app->user->isGuest){
 
         <?= dmstr\widgets\Menu::widget(
             [
-                'options' => ['class' => 'sidebar-menu'],
+                'options' => ['class' => 'sidebar-menu','data-widget' => 'tree', ],
                 'items' => [
 
                     ['label' => 'Sistemas Q Smart', 'options' => ['class' => 'header']],
@@ -68,16 +68,22 @@ if(Yii::$app->user->isGuest){
                             ['label' => 'Monitoring', 'icon' => 'fa fa-info-circle', 'url' => ['/calc-z-testes/zcalc']],
                         ],
                     ],
-					[
-                        'label' => 'Teste',
-                        'icon' => 'fa fa-reorder',
-                        'url' => ['/teste2/index'],
+					// [
+                        // 'label' => 'Teste',
+                        // 'icon' => 'fa fa-reorder',
+                        // 'url' => '#',
                         // 'items' => [
-                            // ['label' => 'Register', 'icon' => 'fa fa-info-circle', 'url' => ['/calc-z-config/index']],
-                            // ['label' => 'Input', 'icon' => 'fa fa-info-circle', 'url' => ['/calc-z-testes/index']],
-                            // ['label' => 'Monitoring', 'icon' => 'fa fa-info-circle', 'url' => ['/calc-z-testes/zcalc']],
+                            // ['label' => 'Register', 'icon' => 'fa fa-info-circle', 'url' => ['/teste2/index']]
                         // ],
-                    ],
+                    // ],
+					[
+						'label' => 'XRF',
+                        'icon' => 'fa fa-reorder',
+                        'url' => '#',
+                        'items' => [
+                            ['label' => 'Status RoHS', 'icon' => 'fa fa-info-circle', 'url' => ['/statusrohs/index']]
+                        ],
+					]
                     //['label' => 'Line Audit', 'icon' => 'fa fa-check-square-o', 'url' => ['/line-audit-auditoria/index']],
 					//['label' => 'Load ON', 'icon' => 'fa fa-line-chart', 'url' => ['/site/loadon']],
 					//['label' => 'Control of Inspector Load', 'icon' => 'fa fa-line-chart', 'url' => ['/site/index']],
@@ -85,6 +91,8 @@ if(Yii::$app->user->isGuest){
                 ],
             ]
         ) ?>
+		
+
 
         <ul class="sidebar-menu">
             <li class="header"><span>Sistemas LG</span></li>

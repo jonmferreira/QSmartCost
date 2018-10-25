@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "44f621274a3c4ddca93a2f84dcb2c287",
+    "content-hash": "ef8b3697a7a1a8d31eb46f9c13aba79c",
     "packages": [
         {
             "name": "almasaeed2010/adminlte",
@@ -275,16 +275,16 @@
         },
         {
             "name": "dmstr/yii2-adminlte-asset",
-            "version": "2.6.2",
+            "version": "2.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/dmstr/yii2-adminlte-asset.git",
-                "reference": "c96336e1960ebc6c1e72487a7c6ca1a1589519fe"
+                "reference": "653cf20aef352a56d38303e6c2197a851cb15f6f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/dmstr/yii2-adminlte-asset/zipball/c96336e1960ebc6c1e72487a7c6ca1a1589519fe",
-                "reference": "c96336e1960ebc6c1e72487a7c6ca1a1589519fe",
+                "url": "https://api.github.com/repos/dmstr/yii2-adminlte-asset/zipball/653cf20aef352a56d38303e6c2197a851cb15f6f",
+                "reference": "653cf20aef352a56d38303e6c2197a851cb15f6f",
                 "shasum": ""
             },
             "require": {
@@ -331,7 +331,7 @@
                 "theme",
                 "yii2"
             ],
-            "time": "2018-07-24T14:47:13+00:00"
+            "time": "2017-10-12T06:10:53+00:00"
         },
         {
             "name": "ezyang/htmlpurifier",
