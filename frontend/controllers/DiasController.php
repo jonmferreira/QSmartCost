@@ -41,7 +41,7 @@ class DiasController extends Controller
 
         $htm = $htm.'</tr></table>';
 
-        echo $htm;
+        return $htm;
     } 
 
 }
