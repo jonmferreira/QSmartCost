@@ -83,7 +83,8 @@ if(Yii::$app->user->isGuest){
                         'items' => [
                             ['label' => 'Status RoHS', 'icon' => 'fa fa-info-circle', 'url' => ['/statusrohs/index']]
                         ],
-					]
+					],
+                    [ 'label' => 'Goals Plan', 'icon' => 'fa fa-search', 'url' => '#',]
                     //['label' => 'Line Audit', 'icon' => 'fa fa-check-square-o', 'url' => ['/line-audit-auditoria/index']],
 					//['label' => 'Load ON', 'icon' => 'fa fa-line-chart', 'url' => ['/site/loadon']],
 					//['label' => 'Control of Inspector Load', 'icon' => 'fa fa-line-chart', 'url' => ['/site/index']],
