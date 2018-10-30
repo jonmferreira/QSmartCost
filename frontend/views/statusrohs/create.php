@@ -10,12 +10,20 @@ $this->title = 'Create Statusrohs';
 $this->params['breadcrumbs'][] = ['label' => 'Statusrohs', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+</br>
 <div class="statusrohs-create">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <div class="box box-danger">
+        <div class="box-header with-border">
+			<br>
+			<h1><?= Html::encode($this->title) ?></h1>
+		</div>
 
-    <?= $this->render('_form', [
-        'model' => $model,
-    ]) ?>
+	    <div class="container">
+	    	<?= $this->render('_form', [
+	        	'model' => $model,
+	    	]) ?>
+	    </div>
+	 </div>
 
 </div>

@@ -19,8 +19,8 @@ for($i=$start_time; $i<$end_time; $i+=86400)
 {
    $list[] = date('Y-m-d-D', $i);
 }
-$htm= '<table class="table table-bordered" >
-			<tr>';
+//$htm= '<table class="table table-bordered" ><tr>';
+$htm = '<th></th>';
 
 
 foreach ($list as $data) {
@@ -32,7 +32,7 @@ foreach ($list as $data) {
 	
 }
 
-$htm = $htm.'</tr></table>';
+//$htm = $htm.'</tr></table>';
 
 echo $htm;
 

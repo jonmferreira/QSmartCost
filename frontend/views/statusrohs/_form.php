@@ -64,16 +64,16 @@ $this->registerJs($script, $position);
     <div class="form-group">
 
         <?= 
-		Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+		        Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
     </div>
 
     <div style="overflow: overlay;">
         <table class="table table-bordered" >
             <tr id = "days-header">
-                  <button>Click me to hide paragraphs</button>  
+                  <button>Click</button>  
             </tr>
             <tr>
-               <td>Item 1 MWO IQ6</td> 
+               <td>Item1_MWO_IQ6</td> 
                <td>
                    <div class="radio">
                       <label>
