@@ -58,9 +58,11 @@ Configuração de projeto inicial
 ===============================
 1º instalar composer:
 - composer intall
+
 2º alterar nome de banco em:
 - ..\common\config\main-local
     * dbname = <yourdbname>
+
 3º no windows, copiar a pasta bower em :
 - ..\vendor\yidas\yii2-bower-asset
 - colar em ..\vendor    
