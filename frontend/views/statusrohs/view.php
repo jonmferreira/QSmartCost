@@ -69,7 +69,7 @@ $this->registerJs($script, $position);
 	            	<tr><td>Item1 MWO IQC6</td>
 	            		<td></td>
 	            		<td></td>
-	            		<td><button type="button" class="btn btn-success example-popover" styledata-container="body" style = "border-radius: 45%;"data-toggle="popover" data-placement="top" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus.">
+	            		<td><button type="button" class="btn btn-success example-popover" styledata-container="body" style = "border-radius: 45%;"data-toggle="popover" data-placement="top" data-content="">
 						  
 						</button></td>
 	            	</tr>
@@ -82,7 +82,7 @@ $this->registerJs($script, $position);
 	            		<td></td>
 	            		<td></td>
 	            		<td></td>
-	            		<td><button type="button" class="btn btn-light example-popover" styledata-container="body" style = "border-radius: 45%;"data-toggle="popover" data-placement="top" data-content="">
+	            		<td><button type="button" class="btn btn-light example-popover" styledata-container="body" style = "border-radius: 45%;"data-toggle="popover" data-placement="top" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus.">
 						  
 						</button></td>
 	            		<td></td>
@@ -98,7 +98,7 @@ $this->registerJs($script, $position);
 	            		<td></td>
 	            		<td></td>
 
-	            		<td><button type="button" class="btn btn-success example-popover" styledata-container="body" style = "border-radius: 45%;"data-toggle="popover" data-placement="top" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus.">
+	            		<td><button type="button" class="btn btn-success example-popover" styledata-container="body" style = "border-radius: 45%;"data-toggle="popover" data-placement="top" data-content="">
 						  
 						</button>
 						</td>
@@ -109,7 +109,7 @@ $this->registerJs($script, $position);
 	            		<td></td>
 	            		<td></td>
 	            		<td></td>
-	            		<td><button type="button" class="btn btn-light example-popover" styledata-container="body" style = "border-radius: 45%;"data-toggle="popover" data-placement="top" data-content="">
+	            		<td><button type="button" class="btn btn-light example-popover" styledata-container="body" style = "border-radius: 45%;"data-toggle="popover" data-placement="top" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus.">
 						  
 						</button></td>
 	            		<td></td>
