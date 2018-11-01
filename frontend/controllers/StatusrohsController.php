@@ -143,7 +143,7 @@ class StatusrohsController extends Controller
 
             $htm = $htm.'</tr></thead><tbody>';
 
-            $items = array('Item1 MWO IQC6','Item2 RAC IQC6');
+            $items = array('Item1 MWO IQC6','Item2 RAC IQC6','Item4 MWO IQC6','Item5 RAC IQC6','Item6 MWO IQC6','Item7 RAC IQC6','Item8 MWO IQC6','Item9 RAC IQC6','Item1 MWO IQC10','Item2 RAC IQC11');
             foreach ($items as $key) {
                 $htm = $htm . '<tr><td>' . $key . '</td>';
                 foreach ($dias_total as $dia) {

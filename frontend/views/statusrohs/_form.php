@@ -78,12 +78,6 @@ $this->registerJs($script, $position);
 
       <div class="help-block"></div>
     </div>
-    <div class="form-group">
-
-        <!-- <?= 
-		        Html::submitButton('Save', ['class' => 'btn btn-success']) ?> -->
-        <button class="btn btn-success" id = "btn-salvar">Save</button>
-    </div>
 
     <div class="table-responsive">
         <input type="button" id = "gerar_dias" value="Click"></input> 
@@ -91,6 +85,13 @@ $this->registerJs($script, $position);
         <table id = "days-header" class="table  table-striped table-hover " style="width: 90%">
             
         </table>
+    </div>
+
+    <div class="form-group">
+
+        <!-- <?= 
+            Html::submitButton('Save', ['class' => 'btn btn-success']) ?> -->
+        <button class="btn btn-success" id = "btn-salvar">Save</button>
     </div>
     <?php ActiveForm::end();  ?>
 
