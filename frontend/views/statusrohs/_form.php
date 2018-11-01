@@ -235,62 +235,6 @@ $this->registerJs($script, $position);
                       </label>
                     </div>
                </td>
-               <td>
-                   <div class="radio">
-                      <label>
-                        <input type="radio" name="optionsRadios" id="optionsRadios1" value="03" >
-                      </label>
-                    </div>
-               </td>
-               <td>
-                   <div class="radio">
-                      <label>
-                        <input type="radio" name="optionsRadios" id="optionsRadios1" value="01" >
-                      </label>
-                    </div>
-               </td>
-               <td>
-                   <div class="radio">
-                      <label>
-                        <input type="radio" name="optionsRadios" id="optionsRadios1" value="02" >
-                      </label>
-                    </div>
-               </td>
-               <td>
-                   <div class="radio">
-                      <label>
-                        <input type="radio" name="optionsRadios" id="optionsRadios1" value="03" >
-                      </label>
-                    </div>
-               </td>
-               <td>
-                   <div class="radio">
-                      <label>
-                        <input type="radio" name="optionsRadios" id="optionsRadios1" value="03" >
-                      </label>
-                    </div>
-               </td>
-               <td>
-                   <div class="radio">
-                      <label>
-                        <input type="radio" name="optionsRadios" id="optionsRadios1" value="03" >
-                      </label>
-                    </div>
-               </td>
-               <td>
-                   <div class="radio">
-                      <label>
-                        <input type="radio" name="optionsRadios" id="optionsRadios1" value="03" >
-                      </label>
-                    </div>
-               </td>
-               <td>
-                   <div class="radio">
-                      <label>
-                        <input type="radio" name="optionsRadios" id="optionsRadios1" value="03" >
-                      </label>
-                    </div>
-               </td>
             </tr>
 
             <tr>
@@ -453,62 +397,6 @@ $this->registerJs($script, $position);
                    <div class="radio">
                       <label>
                         <input type="radio" name="optionsRadios" id="optionsRadios1" value="02" >
-                      </label>
-                    </div>
-               </td>
-               <td>
-                   <div class="radio">
-                      <label>
-                        <input type="radio" name="optionsRadios" id="optionsRadios1" value="03" >
-                      </label>
-                    </div>
-               </td>
-               <td>
-                   <div class="radio">
-                      <label>
-                        <input type="radio" name="optionsRadios" id="optionsRadios1" value="01" >
-                      </label>
-                    </div>
-               </td>
-               <td>
-                   <div class="radio">
-                      <label>
-                        <input type="radio" name="optionsRadios" id="optionsRadios1" value="02" >
-                      </label>
-                    </div>
-               </td>
-               <td>
-                   <div class="radio">
-                      <label>
-                        <input type="radio" name="optionsRadios" id="optionsRadios1" value="03" >
-                      </label>
-                    </div>
-               </td>
-               <td>
-                   <div class="radio">
-                      <label>
-                        <input type="radio" name="optionsRadios" id="optionsRadios1" value="03" >
-                      </label>
-                    </div>
-               </td>
-               <td>
-                   <div class="radio">
-                      <label>
-                        <input type="radio" name="optionsRadios" id="optionsRadios1" value="03" >
-                      </label>
-                    </div>
-               </td>
-               <td>
-                   <div class="radio">
-                      <label>
-                        <input type="radio" name="optionsRadios" id="optionsRadios1" value="03" >
-                      </label>
-                    </div>
-               </td>
-               <td>
-                   <div class="radio">
-                      <label>
-                        <input type="radio" name="optionsRadios" id="optionsRadios1" value="03" >
                       </label>
                     </div>
                </td>
