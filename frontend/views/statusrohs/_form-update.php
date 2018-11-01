@@ -47,7 +47,7 @@ $this->registerJs($script, $position);
 	
 	<div id = "texto-motivo">
 		<div class="form-group">
-		    <label for="textarea">Reson</label>
+		    <label for="textarea">Reason</label>
 		    <textarea class="form-control" id="textarea" rows="10"></textarea>
 		</div>
 	</div>
