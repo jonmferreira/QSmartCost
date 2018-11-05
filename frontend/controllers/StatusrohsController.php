@@ -3,11 +3,14 @@
 namespace frontend\controllers;
 
 use Yii;
+use yii\helpers\Json;
 use common\models\statusrohs;
+use ItemController;
 use common\models\statusrohsSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use common\models\Item;
 
 /**
  * StatusrohsController implements the CRUD actions for statusrohs model.
@@ -53,8 +56,85 @@ class StatusrohsController extends Controller
     public function actionView($id)
     {
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'model' => $this->findModel($id),'teste' => $this->teste($id,$this->findModel($id)['month'])
         ]);
+    }
+
+    private function teste($id,$month){
+        $connection = Yii::$app->getDb();
+
+    
+        $command = $connection->createCommand("SELECT * FROM item WHERE statusrohs = " . $id);
+
+        $result = $command->queryAll();
+
+        /*$items = array();
+        foreach ($result as $item) {
+           $array_push($items,['COUNT(item)']);
+        }*/
+
+            $list = $this->getDatas($month);
+
+            //$htm= '<table class="table table-bordered" ><tr>';
+            $htm = '<thead style="background-color:#b71c1c;color:#fff">
+                    <tr >
+                        <th></th>
+            ';
+
+            $dias_total = array();
+            $datas_total = array();
+            foreach ($list as $data) {
+                //print_r(substr($data,-3));
+                if(!(substr($data,-3) == 'Sun' || substr($data,-3) == 'Sat')){
+                    $htm = $htm . '<th>'. substr($data, -6,-4) .'</th>';
+                    //print_r($data." ");
+                    array_push($dias_total,substr($data, -6,-4));
+                    array_push($datas_total,substr($data,0,-4));
+                }
+                
+            }
+
+            $htm = $htm.'</tr></thead><tbody>';
+
+            foreach ($result as $item) {
+                $htm = $htm . '<tr><td>' . $item['nome'] . '</td>';
+                $i = 0;
+                foreach ($dias_total as $dia) {
+                    
+                    if($datas_total[$i] == $item['data_teste']){
+                        if($item['situacao'] == 'REALIZADO'){
+                             $htm = $htm .'
+                                <td>
+                                    <button type="button" class="btn btn-success example-popover" styledata-container="body" style = "border-radius: 45%;"data-toggle="popover" data-placement="top" data-content="">
+                                    </button>  
+                                </td>
+                            ';
+                        }else{
+                            $htm = $htm .'
+                                <td>
+                                    <button type="button" class="btn btn-light example-popover" styledata-container="body" style = "border-radius: 45%;"data-toggle="popover" data-placement="top" data-content="Falta de Material">
+                                    </button>
+                                </td>
+                            ';
+                        }
+                    }else{
+
+                        $htm = $htm .'
+                            <td>
+
+                                
+                            </td>
+                        ';
+                    }
+                    $i = $i + 1;
+                }
+                $htm = $htm . '</tr>';
+            }
+            $htm = $htm.'</tbody>';
+            
+           
+
+        return $htm ;
     }
 
     /**
@@ -79,32 +159,35 @@ class StatusrohsController extends Controller
     {
         if (Yii::$app->request->isAjax) {
 
-            $data = Yii::$app->request->post();
+            $data = file_get_contents("php://input");
+            //'{"teste":"teste","month":[{"nome":"jon1"},{"nome":"jon2"}]}'
 
-            $month= $data['month'];
-            
+            $json_obj = Json::decode($data);
+            //echo($json_obj['items'][3]['nome']);
+            //echo(sizeof($json_obj['items']));
+            //echo($json_obj['month']);
             
             $model = new statusrohs();
             $model->status = 'PENDING';
-            $model->month = $month;
+            $model->month = $json_obj['month'];
             $model->save();
-            return $this->redirect(['view', 'id' => $model->id]);
-           /* $model->month = $month;
 
-            \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
-            return $this->render('create',[
-                'model' => $model,
-                'code' => 100,
-            ]);*/
+            for ($i=0; $i < sizeof($json_obj['items']); $i++) { 
+                $modelItem = new Item();
+                $modelItem->situacao = 'NÃO_REALIZADO';
+                $modelItem->nome = $json_obj['items'][$i]['nome'];
+                $modelItem->data_teste = $json_obj['items'][$i]['data'];
+                $modelItem->statusrohs = $model->id;
+
+                $modelItem->save();
+            }
+
+            //echo $model->id;
+            return $this->redirect(['view', 'id' => $model->id]);
         }
     }
 
-    public function actionDatas()
-    {
-        
-        if (Yii::$app->request->isAjax) {
-            $t = Yii::$app->request->post();
-            $input = $t['month'];
+    private function getDatas($input){
             $month = substr($input, 0,-3);
             $year = substr($input, 4);
 
@@ -122,7 +205,20 @@ class StatusrohsController extends Controller
             for($i=$start_time; $i<$end_time; $i+=86400)
             {
                $list[] = date('Y-m-d-D', $i);
-            }
+            }  
+
+            return $list;  
+    }
+
+    public function actionDatas()
+    {
+        
+        if (Yii::$app->request->isAjax) {
+            $t = Yii::$app->request->post();
+            $input = $t['month'];
+            
+            $list = $this->getDatas($input);
+
             //$htm= '<table class="table table-bordered" ><tr>';
             $htm = '<thead style="background-color:#b71c1c;color:#fff">
                     <tr >
@@ -130,13 +226,14 @@ class StatusrohsController extends Controller
             ';
 
             $dias_total = array();
-
+            $datas_total = array();
             foreach ($list as $data) {
                 //print_r(substr($data,-3));
                 if(!(substr($data,-3) == 'Sun' || substr($data,-3) == 'Sat')){
                     $htm = $htm . '<th>'. substr($data, -6,-4) .'</th>';
                     //print_r($data." ");
                     array_push($dias_total,substr($data, -6,-4));
+                    array_push($datas_total,substr($data,0,-4));
                 }
                 
             }
@@ -146,16 +243,18 @@ class StatusrohsController extends Controller
             $items = array('Item1_MWO_IQC6','Item2_RAC_IQC6','Item4_MWO_IQC6','Item5_RAC_IQC6','Item6_MWO_IQC6');
             foreach ($items as $key) {
                 $htm = $htm . '<tr><td>' . $key . '</td>';
+                $i = 0;
                 foreach ($dias_total as $dia) {
                     $htm = $htm .'
                         <td>
                             <div class="radio">
                                 <label>
-                                  <input type="radio" name="radios_'. $key .'" id="radio_' . $key.'" value="'. $dia .'" >
+                                  <input type="radio" name="radios_'. $key .'" id="radio_' . $key.'" value="'. $dia .'" data-date="'. $datas_total[$i] .'">
                                 </label>
                             </div>
                         </td>
                     ';
+                    $i = $i + 1;
                 }
                 $htm = $htm . '</tr>';
             }

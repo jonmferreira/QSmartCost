@@ -36,22 +36,35 @@ $script = <<< JS
         });
         $('#btn-salvar').click(function(){
               if($('#myInput').val() != ''){
-                var rows = $('#days-header').find('tbody').find('tr').length);
+                var rows = $('#days-header').find('tbody').find('tr').length;
                 var itemsJson = [];
-                for(int i = 1; i <= rows; i++){
-                    var item = '{"nome":"'+ $('#days-header').find('tbody tr:nth-child(i) td:nth-child(1)').text() + '"," "}';
+                var i;
+                for(i = 1; i <= rows; i++){
+                    var texto = $('#days-header').find('tbody tr:nth-child('+ i + ') td:nth-child(1)').text();
+                    var selValue = $('input[name=radios_' + texto +']:checked').data('date'); 
+                    var item = {nome: texto ,data:selValue };
+
+                    itemsJson.push(item);
                 }
-                var texto = $('#days-header').find('tbody tr:nth-child(3) td:nth-child(1)').text();
-                var selValue = $('input[name=radios_' + texto +']:checked').val(); 
-                alert(selValue);
-                alert(texto);
-                /*$.ajax({
+                
+                //itemsJson = JSON.stringify(itemsJson);
+                //alert(JSON.stringify(itemsJson));
+                //alert(texto);
+                data_arr = JSON.stringify({month:$('#myInput').val(),items:itemsJson});
+                //alert(data_arr);
+                $.ajax({
                      url: '?r=statusrohs/create2',
                      type: 'post',
-                     data:{month:$('#myInput').val()},
+                     datatype: 'json',
+                     contentType: "application/json; charset=utf-8",
+                     data:data_arr,
                      success: function (data) {
+                       //alert(data);
+                     },
+                     error: function(xhr, ajaxOptions, thrownError){
+                        //alert(thrownError);
                      }
-                });*/
+                });
               }              
         });
         $('#btnGetValue').click(function() {

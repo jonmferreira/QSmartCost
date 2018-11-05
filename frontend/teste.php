@@ -37,14 +37,14 @@ foreach ($list as $data) {
 	}
 	
 }
-
+//print_r($dias_total[0]."-<");
 $htm = $htm.'</tr></thead><tbody>';
 
 $items = array('Item1 MWO IQC6','Item2 RAC IQC6');
 foreach ($items as $key) {
 	$htm = $htm . '<tr><td>' . $key . '</td>';
 	foreach ($dias_total as $dia) {
-		print_r(substr($datas_total($i),0,-4) );
+		//print_r(substr($datas_total($i),0,-4) );
 		$htm = $htm .'
 			<td>
                 <div class="radio">
