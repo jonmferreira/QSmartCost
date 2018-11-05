@@ -7,6 +7,7 @@ use yii\helpers\Json;
 use common\models\statusrohs;
 use ItemController;
 use common\models\statusrohsSearch;
+use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -23,6 +24,23 @@ class StatusrohsController extends Controller
     public function behaviors()
     {
         return [
+            /*'access' => [
+                'class' => AccessControl::className(),
+                'only' => ['index', 'create', 'update', 'view','delete'],
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'actions' => ['index', 'view'],
+                        'roles' => ['?'],
+                    ],
+                    [
+                        'allow' => true,
+                        'actions' => ['create','delete','update'],
+                        'roles' => ['@'],
+                    ],
+                ],
+                
+            ],*/
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [

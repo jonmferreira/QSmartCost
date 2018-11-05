@@ -62,7 +62,7 @@ $script = <<< JS
                        //alert(data);
                      },
                      error: function(xhr, ajaxOptions, thrownError){
-                        //alert(thrownError);
+                        alert(thrownError);
                      }
                 });
               }              
@@ -90,7 +90,7 @@ $this->registerJs($script, $position);
       <label class="control-label" for="myInput">Month</label>
       <input type="text" id="myInput" class="form-control" style = "width: 90%" name="statusrohs[month]" maxlength="10" aria-required="true">
 
-      <div class="help-block"></div>
+    <div class="help-block"></div>
     </div>
     <p></p>
     <div class="table-responsive">

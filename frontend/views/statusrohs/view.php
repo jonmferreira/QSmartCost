@@ -63,17 +63,33 @@ $this->registerJs($script, $position);
 
 
 
-		<?= DetailView::widget([
-			'model' => $model,
-			'attributes' => [
-				//'month',
-			    [
-					'attribute' => 'status',
-					'contentOptions' => ['style' => 'color:' . 
-						($model->status == 'PENDING'?'#e6b800': ($model->status == 'APPROVED'?'green':'red'))],
-				]
-			],
-		]) ?>
+		<?php if($model->status == 'NG'){
+				echo DetailView::widget([
+				'model' => $model,
+				'attributes' => [
+				    [
+						'attribute' => 'status',
+						'contentOptions' => ['style' => 'color:' . 
+							($model->status == 'PENDING'?'#e6b800': ($model->status == 'APPROVED'?'green':'red'))],
+					],
+					'reason'
+				],
+			  ]);
+			}
+			else{
+				echo DetailView::widget([
+				'model' => $model,
+				'attributes' => [
+				    [
+						'attribute' => 'status',
+						'contentOptions' => ['style' => 'color:' . 
+							($model->status == 'PENDING'?'#e6b800': ($model->status == 'APPROVED'?'green':'red'))],
+					],
+				],
+			  ]);
+			}
+			 ?>
+			
 
 		<div class="table-responsive">
 	        <input type="button" id="gerar_dias" value="Click" style="display: none;"> 
@@ -95,23 +111,9 @@ $script = <<< JS
   $(document).ready(function() {
  
          
-  		  /*$.holdReady( true );
-		  $.ajax({
-            url: '?r=item/get',
-            type: 'post',
-            datatype: 'json',
-            contentType: "application/json; charset=utf-8",
-            data:JSON.stringify({id:$('p').data('id')}),
-            success: function (data) {
-            	alert(data);
-            },
-            error: function(xhr, ajaxOptions, thrownError){
-            	alert(thrownError);
-            }
-          });*/
-
+  		  
           $('#view-staturohs').click(function(){
-          		alert("h"+$(this).data('id'));
+          		//alert("h"+$(this).data('id'));
           });
           
           
