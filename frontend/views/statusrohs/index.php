@@ -39,7 +39,7 @@ $this->params['breadcrumbs'][] = $this->title;
 						},
 					],
 					['class' => 'yii\grid\ActionColumn',                        
-								'template' => '{view} {start} {stop} {edit} {delete}',                        
+								'template' => '{view} {start} {stop} {edit} {delete} {pdf}',                        
 								'buttons' => [
 									'view' => function($url,$model) {
 											return Html::a(
@@ -55,6 +55,17 @@ $this->params['breadcrumbs'][] = $this->title;
 											return Html::a('<span class="glyphicon glyphicon-trash"></span>', 
 												['delete', 'id' => $model->id], [
 												'class' => 'btn btn-danger',
+												'data' => [
+													'confirm' => 'Are you sure you want to delete this item?',
+													'method' => 'post',
+												]]);
+											
+									},
+									'pdf' => function($url,$model) {
+											return Html::a(
+												'<span class="">Report</span>', 
+												['view', 'id' => $model->id], [
+												'class' => 'btn btn-primary',
 												'data' => [
 													'confirm' => 'Are you sure you want to delete this item?',
 													'method' => 'post',

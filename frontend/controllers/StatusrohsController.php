@@ -12,6 +12,7 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use common\models\Item;
+use yii\helpers\Url;
 
 /**
  * StatusrohsController implements the CRUD actions for statusrohs model.
@@ -115,7 +116,7 @@ class StatusrohsController extends Controller
             $htm = $htm.'</tr></thead><tbody>';
 
             foreach ($result as $item) {
-                $htm = $htm . '<tr><td>' . $item['nome'] . '</td>';
+                $htm = $htm . '<tr><td> <a class = "botao-item" href="'. Url::to('?r=item/view&id='. $item['id'] ) .'">' . $item['nome'] . ' </a></td>';
                 $i = 0;
                 foreach ($dias_total as $dia) {
                     
@@ -130,7 +131,7 @@ class StatusrohsController extends Controller
                         }else{
                             $htm = $htm .'
                                 <td>
-                                    <button type="button" class="btn btn-light example-popover" styledata-container="body" style = "border-radius: 45%;"data-toggle="popover" data-placement="top" data-content="Falta de Material">
+                                    <button type="button" class="btn btn-light example-popover" styledata-container="body" style = "border-radius: 45%;"data-toggle="popover" data-placement="top" data-content="'. $item['comentario'] . '">
                                     </button>
                                 </td>
                             ';

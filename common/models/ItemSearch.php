@@ -19,7 +19,7 @@ class ItemSearch extends Item
     {
         return [
             [['id', 'statusrohs'], 'integer'],
-            [['nome', 'data_teste', 'situacao'], 'safe'],
+            [['nome', 'data_teste', 'situacao','comentario'], 'safe'],
         ];
     }
 
@@ -62,10 +62,11 @@ class ItemSearch extends Item
             'id' => $this->id,
             'data_teste' => $this->data_teste,
             'statusrohs' => $this->statusrohs,
+            'comentario' => $this->comentario,
         ]);
 
         $query->andFilterWhere(['like', 'nome', $this->nome])
-            ->andFilterWhere(['like', 'situacao', $this->situacao]);
+            ->andFilterWhere(['like', 'situacao', $this->situacao])->andFilterWhere(['like', 'comentario', $this->comentario]);
 
         return $dataProvider;
     }

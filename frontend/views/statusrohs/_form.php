@@ -21,6 +21,19 @@ use yii\helpers\Url;
 $link = 'http://localhost/QSmartCost/frontend/web/index.php?r=statusrohs/create2';
 $script = <<< JS
   $(document).ready(function(){
+         $('#myInput').change(function(){
+            if($('#myInput').val() != ''){
+                $.ajax({
+                     url: '?r=statusrohs/datas',
+                     type: 'post',
+                     data:{'month':$('#myInput').val()},
+                     success: function (data) {
+                        $('#days-header').html(data);
+                     }
+                });
+              }   
+
+         });
          $('#gerar_dias').click(function(){
               if($('#myInput').val() != ''){
                 $(this).hide();
@@ -62,7 +75,7 @@ $script = <<< JS
                        //alert(data);
                      },
                      error: function(xhr, ajaxOptions, thrownError){
-                        alert(thrownError);
+                        //alert(thrownError);
                      }
                 });
               }              
@@ -94,7 +107,7 @@ $this->registerJs($script, $position);
     </div>
     <p></p>
     <div class="table-responsive">
-        <input type="button" id = "gerar_dias" value="Click"></input> 
+        <!-- <input type="button" id = "gerar_dias" value="Click"></input>  -->
         <br>
         <table id = "days-header" class="table  table-striped table-hover " style="width: 90%">
             

@@ -18,6 +18,12 @@ $script = <<< JS
 		    container: 'body'
 		  })
 
+		  /*$('.botao-item').each(function () {
+			    $(this).on("click", function () {
+			        alert($(this).data('id'));
+			    });
+		   });*/
+
 		  /*$.ajax({
             url: '?r=Item/getByStatus',
             type: 'post',
