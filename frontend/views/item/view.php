@@ -7,8 +7,8 @@ use yii\widgets\DetailView;
 /* @var $model common\models\Item */
 
 $this->title = $model->nome;
-$this->params['breadcrumbs'][] = ['label' => 'Items', 'url' => ['index']];
-$this->params['breadcrumbs'][] = $this->title;
+//$this->params['breadcrumbs'][] = ['label' => 'Items', 'url' => ['index']];
+//$this->params['breadcrumbs'][] = $this->title;
 ?>
 <br>
 <div class="item-view">
@@ -21,13 +21,13 @@ $this->params['breadcrumbs'][] = $this->title;
 
         <p>
             <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-            <!-- <?= Html::a('Delete', ['delete', 'id' => $model->id], [
+            <?= Html::a('Delete', ['delete', 'id' => $model->id], [
                 'class' => 'btn btn-danger',
                 'data' => [
                     'confirm' => 'Are you sure you want to delete this item?',
                     'method' => 'post',
                 ],
-            ]) ?> -->
+            ]) ?>
         </p>
 
         <div class="table-responsive">
@@ -35,7 +35,7 @@ $this->params['breadcrumbs'][] = $this->title;
             <br>
             <table id="days-header" class="table  table-striped table-hover "><thead style="background-color:#b71c1c;color:#fff">
 
-                <?php //echo $teste?>
+                <?php echo $subitems?>
             </table>
         </div>
 

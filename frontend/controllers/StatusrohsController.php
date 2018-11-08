@@ -12,6 +12,7 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use common\models\Item;
+use common\models\Subitem;
 use yii\helpers\Url;
 
 /**
@@ -191,6 +192,14 @@ class StatusrohsController extends Controller
             $model->month = $json_obj['month'];
             $model->save();
 
+            $items = array(
+                'Item1_MWO_IQC6' => array('SubItem1','SubItem2','SubItem3','SubItem4'),
+                'Item2_RAC_IQC6' => array('SubItem1','SubItem2','SubItem3','SubItem4'),
+                'Item4_MWO_IQC6' => array('SubItem1','SubItem2','SubItem3','SubItem4'),
+                'Item5_RAC_IQC6' => array('SubItem1','SubItem2','SubItem3','SubItem4'),
+                'Item6_MWO_IQC6' => array('SubItem1','SubItem2','SubItem3','SubItem4')
+            );
+
             for ($i=0; $i < sizeof($json_obj['items']); $i++) { 
                 $modelItem = new Item();
                 $modelItem->situacao = 'NÃO_REALIZADO';
@@ -199,6 +208,16 @@ class StatusrohsController extends Controller
                 $modelItem->statusrohs = $model->id;
 
                 $modelItem->save();
+
+                foreach ($items[$json_obj['items'][$i]['nome']] as $subitem) {
+                    $modelSubitem = new Subitem();
+                    $modelSubitem->nome = $subitem;
+                    $modelSubitem->data_teste = $json_obj['items'][$i]['data'];
+                    $modelSubitem->item = $modelItem->id;
+
+                    $modelSubitem->save();
+                }
+
             }
 
             //echo $model->id;
