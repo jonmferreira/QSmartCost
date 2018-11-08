@@ -75,7 +75,7 @@ class StatusrohsController extends Controller
         ]);
     }
 
-    private function teste($id,$month){
+    public function teste($id,$month){
         $connection = Yii::$app->getDb();
 
     
@@ -112,7 +112,7 @@ class StatusrohsController extends Controller
             $htm = $htm.'</tr></thead><tbody>';
 
             foreach ($result as $item) {
-                $htm = $htm . '<tr><td> <a class = "botao-item" href="'. Url::to('?r=item/view&id='. $item['id'] ) .'">' . $item['nome'] . ' </a></td>';
+                $htm = $htm . '<tr><td> <a class = "botao-item" href="'. Url::to('?r=item/view&id='. $item['id'] ) .'&idstatus='. $id .'">' . $item['nome'] . ' </a></td>';
                 $i = 0;
                 foreach ($dias_total as $dia) {
                     
@@ -338,7 +338,7 @@ class StatusrohsController extends Controller
      * @return statusrohs the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($id)
+    public function findModel($id)
     {
         if (($model = statusrohs::findOne($id)) !== null) {
             return $model;

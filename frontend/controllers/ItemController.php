@@ -6,6 +6,8 @@ use Yii;
 use common\models\Item;
 use yii\helpers\Json;
 use common\models\ItemSearch;
+use frontend\controllers\StatusrohsController;
+use common\models\statusrohs;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -51,10 +53,10 @@ class ItemController extends Controller
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionView($id)
+    public function actionView($id,$idstatus)
     {
         return $this->render('view', [
-            'model' => $this->findModel($id),'subitems' => $this->subitems($id,$this->findModel($id)['situacao'])
+            'model' => $this->findModel($id),'subitems' => $this->subitems($id,$this->findModel($id)['situacao']),'idstatus'=>$idstatus
         ]);
     }
 
@@ -144,12 +146,13 @@ class ItemController extends Controller
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionUpdate($id)
+    public function actionUpdate($id,$idstatus)
     {
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['view', 'id' => $model->id,'idstatus' => $idstatus]);
+            //return $this->render('//statusrohs/view',['model' => statusrohs::findOne($idstatus),'teste' => StatusrohsController::teste($idstatus,StatusrohsController::findModel($idstatus))['month']]);
         }
 
         return $this->render('update', [
