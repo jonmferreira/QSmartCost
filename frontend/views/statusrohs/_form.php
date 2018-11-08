@@ -111,6 +111,7 @@ $this->registerJs($script, $position);
         <br>
         <table id = "days-header" class="table  table-striped table-hover " style="width: 90%">
             
+
         </table>
     </div>
 

@@ -55,7 +55,16 @@ $this->registerJs($script, $position);
 		</div>
 
 		<p id = "view-staturohs">
-			<?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+			<?php 
+				if(Yii::$app->user->identity != null){
+					if (Yii::$app->user->identity->admin == 1){
+						echo Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ;
+					}
+				}
+				
+			?>
+			
+
 			<!--<?= Html::a('Delete', ['delete', 'id' => $model->id], [
 				'class' => 'btn btn-danger',
 				'data' => [

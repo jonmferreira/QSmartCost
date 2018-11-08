@@ -26,23 +26,18 @@ class StatusrohsController extends Controller
     public function behaviors()
     {
         return [
-            /*'access' => [
+            'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['index', 'create', 'update', 'view','delete'],
+                'only' => [  'update','delete','create'],
                 'rules' => [
                     [
                         'allow' => true,
-                        'actions' => ['index', 'view'],
-                        'roles' => ['?'],
-                    ],
-                    [
-                        'allow' => true,
-                        'actions' => ['create','delete','update'],
+                        'actions' => ['update','delete','create'],
                         'roles' => ['@'],
                     ],
                 ],
                 
-            ],*/
+            ],
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [

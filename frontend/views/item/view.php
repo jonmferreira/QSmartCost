@@ -30,15 +30,6 @@ $this->title = $model->nome;
             ]) ?>
         </p>
 
-        <div class="table-responsive">
-            <input type="button" id="gerar_dias" value="Click" style="display: none;"> 
-            <br>
-            <table id="days-header" class="table  table-striped table-hover "><thead style="background-color:#b71c1c;color:#fff">
-
-                <?php echo $subitems?>
-            </table>
-        </div>
-
         <?php if($model->situacao == 'NÃO_REALIZADO' && $model->comentario != ''){
                 echo DetailView::widget([
                 'model' => $model,
@@ -60,5 +51,14 @@ $this->title = $model->nome;
               ]);
             }*/
         ?>
+
+        <div class="table-responsive">
+            <input type="button" id="gerar_dias" value="Click" style="display: none;"> 
+            <br>
+            <table id="days-header" class="table  table-striped table-hover "><thead style="background-color:#b71c1c;color:#fff">
+
+                <?php echo $subitems?>
+            </table>
+        </div>
     </div>
 </div>
