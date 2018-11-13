@@ -189,10 +189,41 @@ class StatusrohsController extends Controller
 
             $items = array(
                 'ABW73152517' => array('Surface','Insulator 1','Insulator 2','Tape'),
-                'Chassis_Assembly' => array('SubItem1','SubItem2','SubItem3','SubItem4'),
+                'Chassis Assembly' => array('SubItem1','SubItem2','SubItem3','SubItem4'),
                 'Cover' => array('SubItem1','SubItem2','SubItem3','SubItem4'),
-                'Fan_Assy_Propeller' => array('SubItem1','SubItem2','SubItem3','SubItem4'),
-                
+                'Fan Assy Propeller' => array('SubItem1','SubItem2','SubItem3','SubItem4'),
+                /*'Grille Assy Front' => array('SubItem1','SubItem2','SubItem3','SubItem4'),
+                'Damper Butyl' => array('Surface','Insulator 1','Insulator 2','Tape'),
+                'Tube Assembly,Reverse
+l' => array('Surface','Insulator 1','Insulator 2','Tape'),
+                'PCB Assembly 
+' => array('Surface','Insulator 1','Insulator 2','Tape'),
+                'Panel Assembly Front(Outdoor)
+' => array('Surface','Insulator 1','Insulator 2','Tape'),
+                'Remote Controller Assembly' => array('Surface','Insulator 1','Insulator 2','Tape'),
+                'Plate Assembly,Installation' => array('Surface','Insulator 1','Insulator 2','Tape'),
+                'Reactor, Transformer' => array('Surface','Insulator 1','Insulator 2','Tape'),
+                'Motor AC' => array('Surface','Insulator 1','Insulator 2','Tape'),
+                'Motor Assembly,AC,Outdoor' => array('Surface','Insulator 1','Insulator 2','Tape'),
+                'Fan Assembly,Cross Flow' => array('Surface','Insulator 1','Insulator 2','Tape'),
+                'Ionizer, Generator' => array('Surface','Insulator 1','Insulator 2','Tape'),
+                'Ionizer, Generator' => array('Surface','Insulator 1','Insulator 2','Tape'),
+                'Case Assembly,Control(Outdoor)' => array('Surface','Insulator 1','Insulator 2','Tape'),
+                'Motor Assembly,DC,Indoor' => array('Surface','Insulator 1','Insulator 2','Tape'),
+                'Valve,Reverse' => array('Surface','Insulator 1','Insulator 2','Tape'),
+                'Valve,Service' => array('Surface','Insulator 1','Insulator 2','Tape'),
+                'Tube Assembly,Tubing' => array('Surface','Insulator 1','Insulator 2','Tape'),
+                'Parafuso' => array('Surface','Insulator 1','Insulator 2','Tape'),
+                'Harness,Multi
+' => array('Surface','Insulator 1','Insulator 2','Tape'),
+                'Base Assembly,Outdoor' => array('Surface','Insulator 1','Insulator 2','Tape'),
+                'Insulator
+' => array('Surface','Insulator 1','Insulator 2','Tape'),
+                'Bracket,Motor
+' => array('Surface','Insulator 1','Insulator 2','Tape'),
+                'Panel,Control' => array('Surface','Insulator 1','Insulator 2','Tape'),
+                'Orifice' => array('Surface','Insulator 1','Insulator 2','Tape'), 
+                'Case Assembly,Control(Indoor)' => array('Surface','Insulator 1','Insulator 2','Tape'),*/
             );
 
             for ($i=0; $i < sizeof($json_obj['items']); $i++) { 
@@ -273,7 +304,41 @@ class StatusrohsController extends Controller
 
             $htm = $htm.'</tr></thead><tbody>';
 
-            $items = array('ABW73152517','Chassis_Assembly','Cover','Fan_Assy_Propeller');
+            $items = array(
+                'ABW73152517',
+                'Chassis Assembly' ,
+                'Cover',
+                'Fan Assy Propeller' ,
+                /*'Grille Assy Front' ,
+                'Damper Butyl' ,
+                'Tube Assembly,Reverse
+l',
+                'PCB Assembly',
+                'Panel Assembly Front(Outdoor)',
+                'Remote Controller Assembly' ,
+                'Plate Assembly,Installation' ,
+                'Reactor, Transformer' ,
+                'Motor AC',
+                'Motor Assembly,AC,Outdoor' ,
+                'Fan Assembly,Cross Flow' ,
+                'Ionizer, Generator' ,
+                'Ionizer, Generator' ,
+                'Case Assembly,Control(Outdoor)' ,
+                'Motor Assembly,DC,Indoor' ,
+                'Valve,Reverse' ,
+                'Valve,Service' ,
+                'Tube Assembly,Tubing' ,
+                'Parafuso' ,
+                'Harness,Multi',
+                'Base Assembly,Outdoor' ,
+                'Insulator
+' ,
+                'Bracket,Motor
+' ,
+                'Panel,Control' ,
+                'Orifice' , 
+                'Case Assembly,Control(Indoor)' ,*/
+            );
             foreach ($items as $key) {
                 $htm = $htm . '<tr><td>' . $key . '</td>';
                 $i = 0;
