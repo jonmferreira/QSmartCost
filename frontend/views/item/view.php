@@ -2,13 +2,18 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
-
+use yii\helpers\Url;
+use common\models\statusrohs;
 /* @var $this yii\web\View */
 /* @var $model common\models\Item */
 
+
+
 $this->title = $model->nome;
+$this->params['breadcrumbs'][] = ['label' => 'StatusRoHS', 'url' => ['statusrohs/index']];
+$this->params['breadcrumbs'][] = ['label' => statusrohs::findOne($idstatus)['month'], 'url' => ['statusrohs/view' , 'id'=> $idstatus ]];
 //$this->params['breadcrumbs'][] = ['label' => 'Items', 'url' => ['index']];
-//$this->params['breadcrumbs'][] = $this->title;
+$this->params['breadcrumbs'][] = $this->title;
 ?>
 <br>
 <div class="item-view">

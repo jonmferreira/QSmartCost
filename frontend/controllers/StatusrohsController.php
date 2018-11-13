@@ -120,14 +120,14 @@ class StatusrohsController extends Controller
                         if($item['situacao'] == 'REALIZADO'){
                              $htm = $htm .'
                                 <td>
-                                    <button type="button" class="btn btn-success example-popover" styledata-container="body" style = "border-radius: 45%;"data-toggle="popover" data-placement="top" data-content="">
+                                    <button type="button" class="btn btn-success example-popover" styledata-container="body" style = "height: 25px ;border-radius: 50px;" data-placement="top" data-content="">
                                     </button>  
                                 </td>
                             ';
                         }else{
                             $htm = $htm .'
                                 <td>
-                                    <button type="button" class="btn btn-light example-popover" styledata-container="body" style = "border-radius: 45%;"data-toggle="popover" data-placement="top" data-content="'. $item['comentario'] . '">
+                                    <button type="button" class="btn btn-light example-popover" styledata-container="body" style = "height: 25px ;border-radius: 50px;" data-toggle="popover" data-placement="top" data-content="'. $item['comentario'] . '">
                                     </button>
                                 </td>
                             ';
@@ -188,7 +188,7 @@ class StatusrohsController extends Controller
             $model->save();
 
             $items = array(
-                'Item1_MWO_IQC6' => array('SubItem1','SubItem2','SubItem3','SubItem4'),
+                'ABW73152517' => array('Surface','Insulator 1','Insulator 2','Tape'),
                 'Item2_RAC_IQC6' => array('SubItem1','SubItem2','SubItem3','SubItem4'),
                 'Item4_MWO_IQC6' => array('SubItem1','SubItem2','SubItem3','SubItem4'),
                 'Item5_RAC_IQC6' => array('SubItem1','SubItem2','SubItem3','SubItem4'),
@@ -273,7 +273,7 @@ class StatusrohsController extends Controller
 
             $htm = $htm.'</tr></thead><tbody>';
 
-            $items = array('Item1_MWO_IQC6','Item2_RAC_IQC6','Item4_MWO_IQC6','Item5_RAC_IQC6','Item6_MWO_IQC6');
+            $items = array('ABW73152517','Item2_RAC_IQC6','Item4_MWO_IQC6','Item5_RAC_IQC6','Item6_MWO_IQC6');
             foreach ($items as $key) {
                 $htm = $htm . '<tr><td>' . $key . '</td>';
                 $i = 0;

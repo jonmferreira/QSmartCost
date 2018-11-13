@@ -79,7 +79,7 @@ class ItemController extends Controller
         }
 
         foreach ($result as $item) {
-            $htm = $htm.'<tr><td>'. $item['nome'] . '</td><td> <button class="btn btn-primary"'. $aux .'>Report</button> </td></tr>';
+            $htm = $htm.'<tr><td><a><h5>'. $item['nome'] . '</h5></a></td><td><button class="btn btn-primary"'. $aux .'>Report</button> </td></tr>';
         }
         $htm = $htm.'</tbody>';
         
