@@ -103,7 +103,7 @@ $this->registerJs($script, $position);
 				],
 			  ]);
 			}
-			 ?>
+			 ?>	
 			
 
 		<div class="table-responsive">

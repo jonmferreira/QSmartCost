@@ -11,6 +11,12 @@ use common\models\statusrohs;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\filters\AccessControl;
+
+/*update subitem set operator = 'Claudia', judge = 'O.K.' where item = (select id from item where nome = 'ABW73152517' and data_teste = '2018-10-4') and nome = 'Surface';    update item set situacao = 'REALIZADO' where nome = 'ABW73152517' and data_teste = '2018-10-4';
+update subitem set operator = 'Claudia', judge = 'O.K.' where item = (select id from item where nome = 'ABW73152517' and data_teste = '2018-10-4') and nome = 'Insulator 1';    
+update subitem set operator = 'Claudia', judge = 'O.K.' where item = (select id from item where nome = 'ABW73152517' and data_teste = '2018-10-4') and nome = 'Insulator 2';    
+update subitem set operator = 'Claudia', judge = 'O.K.' where item = (select id from item where nome = 'ABW73152517' and data_teste = '2018-10-4') and nome = 'Tape';   */
 
 /**
  * ItemController implements the CRUD actions for Item model.
@@ -23,6 +29,18 @@ class ItemController extends Controller
     public function behaviors()
     {
         return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'only' => [  'update','delete','create'],
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'actions' => ['update','delete','create'],
+                        'roles' => ['@'],
+                    ],
+                ],
+                
+            ],
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
