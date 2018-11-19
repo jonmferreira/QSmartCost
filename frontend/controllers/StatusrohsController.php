@@ -189,7 +189,7 @@ class StatusrohsController extends Controller
 
             $items = array(
                 'ABW73152517' => array('Surface','Insulator 1','Insulator 2','Tape'),
-                'Chassis_Assembly' => array('SubItem1','SubItem2','SubItem3','SubItem4'),
+                'ABW73152518' => array('Surface','Insulator 1','Insulator 2','Tape'),
                 'Cover' => array('SubItem1','SubItem2','SubItem3','SubItem4'),
                 'Fan_Assy_Propeller' => array('SubItem1','SubItem2','SubItem3','SubItem4'),
                 
@@ -273,7 +273,7 @@ class StatusrohsController extends Controller
 
             $htm = $htm.'</tr></thead><tbody>';
 
-            $items = array('ABW73152517','Chassis_Assembly','Cover','Fan_Assy_Propeller');
+            $items = array('ABW73152517','ABW73152518','Cover','Fan_Assy_Propeller');
             foreach ($items as $key) {
                 $htm = $htm . '<tr><td>' . $key . '</td>';
                 $i = 0;

@@ -110,7 +110,6 @@ $this->registerJs($script, $position);
 	        <input type="button" id="gerar_dias" value="Click" style="display: none;"> 
 	        <br>
 	        <table id="days-header" class="table  table-striped table-hover "><thead style="background-color:#b71c1c;color:#fff">
-
 	            <?php echo $teste?>
 	        </table>
 	    </div>
