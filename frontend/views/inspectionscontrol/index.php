@@ -14,7 +14,7 @@ $this->params['breadcrumbs'][] = $this->title;
 $connection = Yii::$app->getDb();
 
 	//FORNECEDORES LOCAIS
-      $command = $connection->createCommand("SELECT COUNT(item) FROM lg_teste.inspectionscontrol WHERE tipo LIKE 'LOCAL'");
+      $command = $connection->createCommand("SELECT COUNT(item) FROM inspectionscontrol WHERE tipo LIKE 'LOCAL'");
 
       $result = $command->queryAll();
       foreach ($result as $perk) {
@@ -22,7 +22,7 @@ $connection = Yii::$app->getDb();
         break;
       }
 	  
-	  $command = $connection->createCommand("SELECT COUNT(item) FROM lg_teste.inspectionscontrol WHERE method LIKE 'Inspection ' AND tipo LIKE 'LOCAL'");
+	  $command = $connection->createCommand("SELECT COUNT(item) FROM inspectionscontrol WHERE method LIKE 'Inspection ' AND tipo LIKE 'LOCAL'");
 
       $result = $command->queryAll();
       foreach ($result as $perk) {
@@ -30,23 +30,29 @@ $connection = Yii::$app->getDb();
         break;
       }
 	  
-	  $command = $connection->createCommand("SELECT COUNT(item) FROM lg_teste.inspectionscontrol WHERE method LIKE 'Non-Inspection' AND tipo LIKE 'LOCAL'");
+	  $command = $connection->createCommand("SELECT COUNT(item) FROM inspectionscontrol WHERE method LIKE 'Non-Inspection' AND tipo LIKE 'LOCAL'");
 
       $result = $command->queryAll();
       foreach ($result as $perk) {
         $ng = $perk['COUNT(item)'];
         break;
       }
-	  
-	  $resultOK = number_format(($ok*100)/$total, 1, '.' , ',');
-	  $resultNG = number_format(($ng*100)/$total, 1, '.' , ',');
+	  if( $total != 0){
+	  	$resultOK = number_format(($ok*100)/$total, 1, '.' , ',');
+	  	$resultNG = number_format(($ng*100)/$total, 1, '.' , ',');
+	  }
+	  else{
+	  	//erro divZero
+	  	$resultOK = 0;
+	  	$resultNG = 0;	
+	  }
 	  
 	  $checkInsp = $total - $ok - $ng;
 	  $resultCheckInsp = number_format(100 - $resultOK - $resultNG, 1, '.' , ',');
 	  
 	  
 	  //FORNECEDORES IMPORTADOS
-	  $command = $connection->createCommand("SELECT COUNT(item) FROM lg_teste.inspectionscontrol WHERE tipo LIKE 'IMPORTADO'");
+	  $command = $connection->createCommand("SELECT COUNT(item) FROM inspectionscontrol WHERE tipo LIKE 'IMPORTADO'");
 
       $result = $command->queryAll();
       foreach ($result as $perk) {
@@ -54,7 +60,7 @@ $connection = Yii::$app->getDb();
         break;
       }
 	  
-	  $command = $connection->createCommand("SELECT COUNT(item) FROM lg_teste.inspectionscontrol WHERE method LIKE 'Inspection ' AND tipo LIKE 'IMPORTADO'");
+	  $command = $connection->createCommand("SELECT COUNT(item) FROM inspectionscontrol WHERE method LIKE 'Inspection ' AND tipo LIKE 'IMPORTADO'");
 
       $result = $command->queryAll();
       foreach ($result as $perk) {
@@ -62,17 +68,23 @@ $connection = Yii::$app->getDb();
         break;
       }
 	  
-	  $command = $connection->createCommand("SELECT COUNT(item) FROM lg_teste.inspectionscontrol WHERE method LIKE 'Non-Inspection' AND tipo LIKE 'IMPORTADO'");
+	  $command = $connection->createCommand("SELECT COUNT(item) FROM inspectionscontrol WHERE method LIKE 'Non-Inspection' AND tipo LIKE 'IMPORTADO'");
 
       $result = $command->queryAll();
       foreach ($result as $perk) {
         $ngImportado = $perk['COUNT(item)'];
         break;
       }
-	  
-	  $resultOKImportado = number_format(($okImportado*100)/$totalImportado, 1, '.' , ',');
-	  $resultNGImportado = number_format(($ngImportado*100)/$totalImportado, 1, '.' , ',');
-	  
+	  if( $totalImportado ){
+
+	  	$resultOKImportado = number_format(($okImportado*100)/$totalImportado, 1, '.' , ',');
+	  	$resultNGImportado = number_format(($ngImportado*100)/$totalImportado, 1, '.' , ',');	
+	  }
+	  else{
+
+	  	$resultOKImportado = 0;
+	  	$resultNGImportado = 0;
+	  }
 	  $checkInspImportado = $totalImportado - $okImportado - $ngImportado;
 	  $resultCheckInspImportado = number_format(100 - $resultOKImportado - $resultNGImportado, 1, '.' , ',');
 	   

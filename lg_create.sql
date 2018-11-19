@@ -90,6 +90,7 @@ CREATE TABLE `line_audit_auditoria` (
   `line` varchar(25) NOT NULL,
   `auditor` varchar(25) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 CREATE TABLE `line_audit_checklist` (
   `id` int(11) NOT NULL,
   `secao` varchar(100) NOT NULL,
@@ -213,3 +214,162 @@ CREATE TABLE `vendas` (
   `nomeproduto` varchar(255) DEFAULT NULL,
   `linhaproduto` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `user` (
+   `id` int(11) NOT NULL,
+   `username` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+   `auth_key` varchar(32) COLLATE utf8_unicode_ci NOT NULL,
+   `password_hash` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+   `password_reset_token` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+   `email` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+   `status` smallint(6) NOT NULL DEFAULT '10',
+   `created_at` int(11) NOT NULL,
+   `updated_at` int(11) NOT NULL,
+   `name` varchar(100) COLLATE utf8_unicode_ci NOT NULL
+ ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+CREATE TABLE `alert` (
+  `id` int(11) NOT NULL,
+  `id_data` bigint(20) NOT NULL,
+  `asn` varchar(45) NOT NULL,
+  `divisao` varchar(15) NOT NULL,
+  `qty_defeito` int(11) NOT NULL,
+  `total_qty` int(11) NOT NULL,
+  `amostra` int(11) NOT NULL,
+  `modelo` varchar(50) NOT NULL,
+  `part_number` varchar(50) NOT NULL,
+  `part_name` varchar(90) NOT NULL,
+  `forncedor` varchar(50) NOT NULL,
+  `comentario` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+ALTER TABLE `alert`
+  ADD PRIMARY KEY (`id`);
+
+ALTER TABLE `autorizadas`
+  ADD PRIMARY KEY (`id`);
+
+ALTER TABLE `calc_z_config`
+  ADD PRIMARY KEY (`modelo`);
+
+ALTER TABLE `calc_z_testes`
+  ADD PRIMARY KEY (`id`);
+
+ALTER TABLE `count`
+  ADD PRIMARY KEY (`id`);
+
+ALTER TABLE `fornecedores`
+  ADD PRIMARY KEY (`id`);
+
+
+ALTER TABLE `inspectionscontrol`
+  ADD PRIMARY KEY (`id`);
+
+
+ALTER TABLE `lar`
+  ADD PRIMARY KEY (`id`);
+
+ALTER TABLE `lar_nw8`
+  ADD PRIMARY KEY (`id`);
+
+
+ALTER TABLE `line_audit_auditoria`
+  ADD PRIMARY KEY (`id`);
+
+
+ALTER TABLE `line_audit_checklist`
+  ADD PRIMARY KEY (`id`);
+
+ALTER TABLE `line_audit_results`
+  ADD PRIMARY KEY (`id`);
+
+ALTER TABLE `listamestra`
+  ADD PRIMARY KEY (`partNumber`);
+
+ ALTER TABLE `load`
+   ADD PRIMARY KEY (`asn`);
+
+ALTER TABLE `loadtest`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `item` (`departure_date`,`receipt_date`),
+  ADD KEY `item_3` (`departure_date`,`receipt_date`);
+
+
+ ALTER TABLE `migration`
+   ADD PRIMARY KEY (`version`);
+
+ALTER TABLE `oqc_inspection`
+  ADD PRIMARY KEY (`model`);
+
+ALTER TABLE `prr`
+  ADD PRIMARY KEY (`id`);
+
+ALTER TABLE `qcost`
+  ADD PRIMARY KEY (`id`);
+
+ALTER TABLE `qualidade`
+  ADD PRIMARY KEY (`partNumber`);
+
+ALTER TABLE `reparo`
+  ADD PRIMARY KEY (`id`);
+
+ALTER TABLE `user`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `username` (`username`),
+  ADD UNIQUE KEY `email` (`email`),
+  ADD UNIQUE KEY `password_reset_token` (`password_reset_token`);
+
+ALTER TABLE `vendas`
+  ADD PRIMARY KEY (`id`);
+
+
+ALTER TABLE `alert`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+
+ALTER TABLE `autorizadas`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+ALTER TABLE `calc_z_testes`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=297;
+
+ALTER TABLE `count`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7371;
+
+ALTER TABLE `fornecedores`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
+ALTER TABLE `inspectionscontrol`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=71247;
+
+ALTER TABLE `lar`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19063;
+
+ALTER TABLE `lar_nw8`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12923;
+
+ALTER TABLE `line_audit_auditoria`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+
+ALTER TABLE `line_audit_checklist`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=76;
+
+ALTER TABLE `line_audit_results`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+
+ALTER TABLE `loadtest`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+ALTER TABLE `prr`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=348;
+
+ALTER TABLE `qcost`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5068;
+
+ALTER TABLE `reparo`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39394;
+
+ALTER TABLE `user`
+ MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+
+ALTER TABLE `vendas`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6075;
