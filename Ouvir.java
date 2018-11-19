@@ -14,9 +14,13 @@ public class Ouvir {
 	public static void main(String[] args) throws IOException,
 			InterruptedException {
 
-		Path faxFolder = Paths.get("//javari/IQC_F2/Jose_Alberto");
+		//Path faxFolder = Paths.get("//javari/IQC_F2/Jose_Alberto");
+		Path faxFolder = Paths.get("./fax");
 		WatchService watchService = FileSystems.getDefault().newWatchService();
-		faxFolder.register(watchService, StandardWatchEventKinds.ENTRY_CREATE);
+		WatchEvent.Kind<?>[] events = { StandardWatchEventKinds.ENTRY_CREATE,
+        StandardWatchEventKinds.ENTRY_DELETE,
+        StandardWatchEventKinds.ENTRY_MODIFY };
+		faxFolder.register(watchService, events, com.sun.nio.file.ExtendedWatchEventModifier.FILE_TREE);
 
 		boolean valid = true;
 		do {
@@ -26,7 +30,10 @@ public class Ouvir {
 				WatchEvent.Kind kind = event.kind();
 				if (StandardWatchEventKinds.ENTRY_CREATE.equals(event.kind())) {
 					String fileName = event.context().toString();
-					System.out.println("File Created:" + fileName);
+					if(!(fileName.substring(fileName.length()-3).equals("TMP") || fileName.substring(fileName.length()-3).equals("tmp"))){
+						System.out.println("File Created:" + fileName);
+					}
+					
 				}
 			}
 			valid = watchKey.reset();
