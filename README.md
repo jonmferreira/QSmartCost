@@ -66,3 +66,5 @@ Configuração de projeto inicial
 3º no windows, copiar a pasta bower em :
 - ..\vendor\yidas\yii2-bower-asset
 - colar em ..\vendor    
+----
+http://localhost:85/QSmartCost/frontend/web/index.php?r=site/signup
