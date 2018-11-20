@@ -24,22 +24,20 @@ $this->params['breadcrumbs'][] = $this->title;
             <h1><?= Html::encode($this->title) ?></h1>
         </div>
 
-        <p>
-            <?= Html::a('Update', ['update', 'id' => $model->id,'idstatus' => $idstatus], ['class' => 'btn btn-primary']) ?>
-            <?= Html::a('Delete', ['delete', 'id' => $model->id], [
-                'class' => 'btn btn-danger',
-                'data' => [
-                    'confirm' => 'Are you sure you want to delete this item?',
-                    'method' => 'post',
-                ],
-            ]) ?>
-        </p>
-
         <?php if($model->situacao == 'NÃO_REALIZADO' && $model->comentario != ''){
                 echo DetailView::widget([
                 'model' => $model,
                 'attributes' => [
                     'comentario'
+                ],
+              ]);
+            }
+
+            if($model->situacao == 'REALIZADO' ){
+                echo DetailView::widget([
+                'model' => $model,
+                'attributes' => [
+                    'part_number'
                 ],
               ]);
             }
@@ -56,6 +54,17 @@ $this->params['breadcrumbs'][] = $this->title;
               ]);
             }*/
         ?>
+
+        <p>
+            <?= Html::a('Update', ['update', 'id' => $model->id,'idstatus' => $idstatus], ['class' => 'btn btn-primary']) ?>
+            <?= Html::a('Delete', ['delete', 'id' => $model->id], [
+                'class' => 'btn btn-danger',
+                'data' => [
+                    'confirm' => 'Are you sure you want to delete this item?',
+                    'method' => 'post',
+                ],
+            ]) ?>
+        </p>
 
         <div class="table-responsive">
             <input type="button" id="gerar_dias" value="Click" style="display: none;"> 

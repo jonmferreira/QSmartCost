@@ -54,7 +54,8 @@ $script = <<< JS
                 var i;
                 for(i = 1; i <= rows; i++){
                     var texto = $('#days-header').find('tbody tr:nth-child('+ i + ') td:nth-child(1)').text();
-                    var selValue = $('input[name=radios_' + texto +']:checked').data('date'); 
+                    var texto_nome = $('#days-header').find('tbody tr:nth-child('+ i + ') td:nth-child(1)').data('nome');
+                    var selValue = $('input[name=radios_' + texto_nome +']:checked').data('date'); 
                     var item = {nome: texto ,data:selValue };
 
                     itemsJson.push(item);
@@ -110,7 +111,6 @@ $this->registerJs($script, $position);
         <!-- <input type="button" id = "gerar_dias" value="Click"></input>  -->
         <br>
         <table id = "days-header" class="table  table-striped table-hover " style="width: 90%">
-            
 
         </table>
     </div>

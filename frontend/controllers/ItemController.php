@@ -178,6 +178,19 @@ class ItemController extends Controller
         ]);
     }
 
+    public function actionUpdatedata()
+    {
+        if (Yii::$app->request->isAjax) {
+
+            $data = file_get_contents("php://input");
+            $json_obj = Json::decode($data);
+            $connection = Yii::$app->getDb();
+            $sql = "update item set data_teste = '". $json_obj['data'] ."' WHERE id = " . $json_obj['id'];
+            
+            $command = $connection->createCommand($sql)->execute();
+        }
+    }
+
     /**
      * Deletes an existing Item model.
      * If deletion is successful, the browser will be redirected to the 'index' page.

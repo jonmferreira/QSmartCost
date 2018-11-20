@@ -93,7 +93,7 @@ class StatusrohsController extends Controller
             //$htm= '<table class="table table-bordered" ><tr>';
             $htm = '<thead style="background-color:#b71c1c;color:#fff">
                     <tr >
-                        <th></th>
+                        <th></th><th></th>
             ';
 
             $dias_total = array();
@@ -113,6 +113,18 @@ class StatusrohsController extends Controller
 
             foreach ($result as $item) {
                 $htm = $htm . '<tr><td> <a class = "botao-item" href="'. Url::to('?r=item/view&id='. $item['id'] ) .'&idstatus='. $id .'">' . $item['nome'] . ' </a></td>';
+
+                if($item['situacao'] == "REALIZADO"){
+                    if($item['judge'] == "O.K."){
+                       $htm = $htm . '<td style = "color: green">'. $item['judge'] .'</td>';
+                    }else{
+                       $htm = $htm . '<td style = "color: red">'. $item['judge'] .'</td>';
+                    }
+                    
+                }else{
+                    $htm = $htm . '<td></td>';
+                }
+
                 $i = 0;
                 foreach ($dias_total as $dia) {
                     
@@ -187,14 +199,6 @@ class StatusrohsController extends Controller
             $model->month = $json_obj['month'];
             $model->save();
 
-            $items = array(
-                'ABW73152517' => array('Surface','Insulator 1','Insulator 2','Tape'),
-                'ABW73152518' => array('Surface','Insulator 1','Insulator 2','Tape'),
-                'Cover' => array('SubItem1','SubItem2','SubItem3','SubItem4'),
-                'Fan_Assy_Propeller' => array('SubItem1','SubItem2','SubItem3','SubItem4'),
-                
-            );
-
             for ($i=0; $i < sizeof($json_obj['items']); $i++) { 
                 $modelItem = new Item();
                 $modelItem->situacao = 'NÃO_REALIZADO';
@@ -204,18 +208,18 @@ class StatusrohsController extends Controller
 
                 $modelItem->save();
 
-                foreach ($items[$json_obj['items'][$i]['nome']] as $subitem) {
+                /*foreach ($items[$json_obj['items'][$i]['nome']] as $subitem) {
                     $modelSubitem = new Subitem();
                     $modelSubitem->nome = $subitem;
                     $modelSubitem->data_teste = $json_obj['items'][$i]['data'];
                     $modelSubitem->item = $modelItem->id;
 
                     $modelSubitem->save();
-                }
+                }*/
 
             }
 
-            //echo $model->id;
+            
             return $this->redirect(['view', 'id' => $model->id]);
         }
     }
@@ -272,17 +276,27 @@ class StatusrohsController extends Controller
             }
 
             $htm = $htm.'</tr></thead><tbody>';
+            //$items = array('ABW73152517','ABW73152518','Cover','Fan Assy Propeller');
+            $connection = Yii::$app->getDb();
+            $command = $connection->createCommand("SELECT nome FROM item_nome where 1");
+            $result = $command->queryAll();
+            $items = array();
+            foreach ($result as $item) {
+               array_push($items,$item['nome']);
+            }
 
-            $items = array('ABW73152517','ABW73152518','Cover','Fan_Assy_Propeller');
+            
             foreach ($items as $key) {
-                $htm = $htm . '<tr><td>' . $key . '</td>';
+                $trim = str_replace(" ","",$key);
+                $trim = str_replace(",","",$trim);
+                $htm = $htm . '<tr><td data-nome = "'. $trim .'">' . $key . '</td>';
                 $i = 0;
                 foreach ($dias_total as $dia) {
                     $htm = $htm .'
                         <td>
                             <div class="radio">
                                 <label>
-                                  <input type="radio" name="radios_'. $key .'" id="radio_' . $key.'" value="'. $dia .'" data-date="'. $datas_total[$i] .'">
+                                  <input type="radio" name="radios_'. $trim  .'" id="radio_' . $key.'" value="'. $dia .'" data-date="'. $datas_total[$i] .'">
                                 </label>
                             </div>
                         </td>

@@ -33,6 +33,8 @@ class Item extends \yii\db\ActiveRecord
         return [
             [['nome', 'data_teste', 'situacao'], 'required'],
             [['comentario'], 'string', 'max' => 500],
+            [['part_number'], 'string', 'max' => 50],
+            [['judge'], 'string', 'max' => 10],
             [['data_teste'], 'safe'],
             [['statusrohs'], 'integer'],
             [['nome', 'situacao'], 'string', 'max' => 50],
@@ -52,6 +54,8 @@ class Item extends \yii\db\ActiveRecord
             'situacao' => 'Situacao',
             'statusrohs' => 'Statusrohs',
             'comentario' => 'Comment',
+            'part_number' => 'Part Number',
+            'judge' => 'Judge',
         ];
     }
 
