@@ -74,11 +74,11 @@ class ItemController extends Controller
     public function actionView($id,$idstatus)
     {
         return $this->render('view', [
-            'model' => $this->findModel($id),'subitems' => $this->subitems($id,$this->findModel($id)['situacao']),'idstatus'=>$idstatus
+            'model' => $this->findModel($id),'subitems' => $this->subitems($id,$this->findModel($id)['situacao'],$this->findModel($id)['nome']),'idstatus'=>$idstatus
         ]);
     }
 
-    private function subitems($id,$situacao){
+    private function subitems($id,$situacao,$nome){
         $connection = Yii::$app->getDb();
 
     
@@ -97,7 +97,7 @@ class ItemController extends Controller
         }
 
         foreach ($result as $item) {
-            $htm = $htm.'<tr><td><a><h5>'. $item['nome'] . '</h5></a></td><td><button class="btn btn-primary"'. $aux .'>Report</button> </td></tr>';
+            $htm = $htm.'<tr><td><a><h5>'. $item['nome'] . '</h5></a></td><td><a href = "http://localhost/ReportsFiles/' . $item['data_teste'] . '_'. $item['sample_no'] .'_'. $item['nome'] .'_' .$nome .'.xls"><button class="btn btn-primary"'. $aux .'>Report</button></a></td></tr>';
         }
         $htm = $htm.'</tbody>';
         

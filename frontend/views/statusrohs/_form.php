@@ -73,7 +73,7 @@ $script = <<< JS
                      contentType: "application/json; charset=utf-8",
                      data:data_arr,
                      success: function (data) {
-                       alert(data);
+                       //alert(data);
                      },
                      error: function(xhr, ajaxOptions, thrownError){
                         //alert(thrownError);
