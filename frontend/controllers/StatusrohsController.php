@@ -116,9 +116,9 @@ class StatusrohsController extends Controller
 
                 if($item['situacao'] == "REALIZADO"){
                     if($item['judge'] == "O.K."){   
-                       $htm = $htm . '<td style = "color: green">'. $item['judge'] .'</td>';
+                       $htm = $htm . '<td style = "text-align:center;background-color: #32CD32; color:white;">'. $item['judge'] .'</td>';
                     }else{
-                       $htm = $htm . '<td style = "color: red">'. $item['judge'] .'</td>';
+                       $htm = $htm . '<td style = "text-align:center;background-color: red; color:white;">'. $item['judge'] .'</td>';
                     }
                     
                 }else{
