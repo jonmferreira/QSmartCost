@@ -97,7 +97,7 @@ class ItemController extends Controller
         }
 
         foreach ($result as $item) {
-            $htm = $htm.'<tr><td><a><h5>'. $item['nome'] . '</h5></a></td><td><a href = "http://localhost/ReportsFiles/' . $item['data_teste'] . '_'. $item['sample_no'] .'_'. $item['nome'] .'_' .$nome .'.xls"><button class="btn btn-primary"'. $aux .'>Report</button></a></td></tr>';
+            $htm = $htm.'<tr><td><a><h5>'. $item['nome'] . '</h5></a></td><td><a href = "http://localhost/QSmartCost/exportarPDF.php?nome=' . $item['data_teste'] . '_'. $item['sample_no'] .'_'. $item['nome'] .'_' .$nome .'.html"><button class="btn btn-primary"'. $aux .'>Report</button></a></td></tr>';
         }
         $htm = $htm.'</tbody>';
         
