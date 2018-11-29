@@ -9,6 +9,7 @@ use yii\grid\GridView;
 
 $this->title = 'StatusRoHS';
 $this->params['breadcrumbs'][] = $this->title;
+
 ?>
 
 </br>
@@ -24,7 +25,7 @@ $this->params['breadcrumbs'][] = $this->title;
 				<?= Html::a('Create StatusRoHS', ['create'], ['class' => 'btn btn-success']) ?>
 			</p>
 
-			<?= GridView::widget([
+			<?php echo GridView::widget([
 				'dataProvider' => $dataProvider,
 				'filterModel' => $searchModel,
 				'columns' => [
@@ -39,7 +40,7 @@ $this->params['breadcrumbs'][] = $this->title;
 						},
 					],
 					['class' => 'yii\grid\ActionColumn',                        
-								'template' => '{view} {start} {stop} {edit} {delete} {pdf}',                        
+								'template' => '{view} {start} {stop} {edit} {delete} {barra}',                        
 								'buttons' => [
 									'view' => function($url,$model) {
 											return Html::a(
@@ -61,17 +62,11 @@ $this->params['breadcrumbs'][] = $this->title;
 												]]);
 											
 									},
-									'pdf' => function($url,$model) {
-											return Html::a(
-												'<span class="">Report</span>', 
-												['view', 'id' => $model->id], [
-												'class' => 'btn btn-primary',
-												'data' => [
-													'confirm' => 'Are you sure you want to delete this item?',
-													'method' => 'post',
-												]]);
-											
-									},
+									/*'barra' => function($url,$model) {
+											return '<div class="progress">
+													  <div class="progress-bar bg-success" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
+													</div>';
+									},*/
 								],
 					],
 				],

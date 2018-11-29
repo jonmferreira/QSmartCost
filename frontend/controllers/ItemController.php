@@ -87,8 +87,8 @@ class ItemController extends Controller
         $result = $command->queryAll();
 
        
-
-        $htm = '<tbody>';
+        $htm = '<thead style="background-color:#b71c1c;color:#fff"><td>Sample name</td><td>Cd_Judge</td><td>Pb_Judge</td><td>Hg_Judge</td><td>Br_Judge</td><td>Cr_Judge</td><td></td></thead>';
+        $htm = $htm.'<tbody>';
 
         if($situacao == 'NÃO_REALIZADO'){
             $aux = 'disabled';
@@ -97,7 +97,22 @@ class ItemController extends Controller
         }
 
         foreach ($result as $item) {
-            $htm = $htm.'<tr><td><a><h5>'. $item['nome'] . '</h5></a></td><td><a href = "http://localhost/QSmartCost/exportarPDF.php?nome=' . $item['data_teste'] . '_'. $item['sample_no'] .'_'. $item['nome'] .'_' .$nome .'.html"><button class="btn btn-primary"'. $aux .'>Report</button></a></td></tr>';
+            $htm = $htm.'<tr><td><a><h5>'. $item['nome'] . '</h5>';
+
+            if($item['cd_judge'] == "O.K.") $htm = $htm.'<td style="color:green;">O.K.</td>';
+            else $htm = $htm.'<td style="color:red;">N.G.</td>';
+            if($item['pb_judge'] == "O.K.") $htm = $htm.'<td style="color:green;">O.K.</td>';
+            else $htm = $htm.'<td style="color:red;">N.G.</td>';
+            if($item['hg_judge'] == "O.K.") $htm = $htm.'<td style="color:green;">O.K.</td>';
+            else $htm = $htm.'<td style="color:red;">N.G.</td>'; 
+            if($item['br_judge'] == "O.K.") $htm = $htm.'<td style="color:green;">O.K.</td>';
+            else $htm = $htm.'<td style="color:red;">N.G.</td>';
+            if($item['cr_judge'] == "O.K.") $htm = $htm.'<td style="color:green;">O.K.</td>';
+            else $htm = $htm.'<td style="color:red;">N.G.</td>';
+
+            $htm = $htm.'</a></td><td><a href = "http://localhost:85/ReportsFiles/' . $item['data_teste'] . '_'. $item['sample_no'] .'_'. $item['nome'] .'_' .$nome .'.xls"><button class="btn btn-primary"'. $aux .'>Report</button></a></td></tr>';
+
+            /*$htm = $htm.'<tr><td><a><h5>'. $item['nome'] . '</h5></a></td><td><a href = "http://localhost:85/QSmartCost/exportarPDF.php?nome=' . $item['data_teste'] . '_'. $item['sample_no'] .'_'. $item['nome'] .'_' .$nome .'.html"><button class="btn btn-primary"'. $aux .'>Report</button></a></td></tr>';*/
         }
         $htm = $htm.'</tbody>';
         

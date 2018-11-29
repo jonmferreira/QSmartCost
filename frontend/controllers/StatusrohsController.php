@@ -93,7 +93,7 @@ class StatusrohsController extends Controller
             //$htm= '<table class="table table-bordered" ><tr>';
             $htm = '<thead style="background-color:#b71c1c;color:#fff">
                     <tr >
-                        <th></th><th></th>
+                        <th></th><th>Judge</th>
             ';
 
             $dias_total = array();
@@ -101,7 +101,7 @@ class StatusrohsController extends Controller
             foreach ($list as $data) {
                 //print_r(substr($data,-3));
                 if(!(substr($data,-3) == 'Sun' || substr($data,-3) == 'Sat')){
-                    $htm = $htm . '<th>'. substr($data, -6,-4) .'</th>';
+                    $htm = $htm . '<th style="text-align:center">'. substr($data, -6,-4) .'</th>';
                     //print_r($data." ");
                     array_push($dias_total,substr($data, -6,-4));
                     array_push($datas_total,substr($data,0,-4));
@@ -115,7 +115,7 @@ class StatusrohsController extends Controller
                 $htm = $htm . '<tr><td> <a class = "botao-item" href="'. Url::to('?r=item/view&id='. $item['id'] ) .'&idstatus='. $id .'">' . $item['nome'] . ' </a></td>';
 
                 if($item['situacao'] == "REALIZADO"){
-                    if($item['judge'] == "O.K."){
+                    if($item['judge'] == "O.K."){   
                        $htm = $htm . '<td style = "color: green">'. $item['judge'] .'</td>';
                     }else{
                        $htm = $htm . '<td style = "color: red">'. $item['judge'] .'</td>';
@@ -131,7 +131,7 @@ class StatusrohsController extends Controller
                     if($datas_total[$i] == $item['data_teste']){
                         if($item['situacao'] == 'REALIZADO'){
                              $htm = $htm .'
-                                <td>
+                                <td >
                                     <button type="button" class="btn btn-success example-popover" styledata-container="body" style = "height: 25px ;border-radius: 50px;" data-placement="top" data-content="">
                                     </button>  
                                 </td>
