@@ -103,6 +103,9 @@ $this->registerJs($script, $position);
 				],
 			  ]);
 			}*/
+			echo '<h5 style="display:inline;"><b>Plan: </b></h5> <p style="display:inline;">'. $numPlan .'</p>&ensp;&ensp;';
+			echo '<h5 style="display:inline;"><b>Result: </b></h5><p style="display:inline;">'. $numResult .'</p>';
+
 			echo '<h5><b>Progress</b></h5><div class="progress">
 				  <div class="progress-bar progress-bar-success progress-bar-striped " role="progressbar" style="width:'. $numConcluido .'%;" aria-valuenow="'. $numConcluido .'" aria-valuemin="0" aria-valuemax="100">'.$numConcluido.'%</div>
 				</div>';

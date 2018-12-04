@@ -71,7 +71,7 @@ class StatusrohsController extends Controller
     public function actionView($id)
     {
         return $this->render('view', [
-            'model' => $this->findModel($id),'items' => $this->getItems($id,$this->findModel($id)['month']),'numConcluido' => $this->getNumConcluido($id)
+            'model' => $this->findModel($id),'items' => $this->getItems($id,$this->findModel($id)['month']),'numConcluido' => $this->getNumConcluido($id),'numPlan' => $this->getNumPlan($id),'numResult' => $this->getNumResult($id)
         ]);
     }
 
@@ -94,6 +94,33 @@ class StatusrohsController extends Controller
         }
 
         return (($totalRealizado*100)/$total);
+    }
+
+    public function getNumPlan($id){
+
+        $connection = Yii::$app->getDb();
+        $command = $connection->createCommand("SELECT COUNT(id) FROM item WHERE statusrohs = " . $id);
+
+        $result = $command->queryAll();
+        foreach ($result as $perk) {
+            $total = $perk['COUNT(id)'];
+            break;
+        }
+
+        return $total;
+    }
+
+    public function getNumResult($id){
+        $connection = Yii::$app->getDb();
+        $command = $connection->createCommand("SELECT COUNT(id) FROM item WHERE situacao = 'REALIZADO'and statusrohs = " . $id);
+
+        $result = $command->queryAll();
+        foreach ($result as $perk) {
+            $totalRealizado = $perk['COUNT(id)'];
+            break;
+        }
+
+        return $totalRealizado;
     }
 
     public function getItems($id,$month){
@@ -142,9 +169,9 @@ class StatusrohsController extends Controller
 
                 if($item['situacao'] == "REALIZADO"){
                     if($item['judge'] == "O.K."){   
-                       $htm = $htm . '<td style = "text-align:center;background-color: #32CD32; color:white;">'. $item['judge'] .'</td>';
+                       $htm = $htm . '<td style = "text-align:center;background-color: #32f032; color:white;">'. $item['judge'] .'</td>';
                     }else{
-                       $htm = $htm . '<td style = "text-align:center;background-color: red; color:white;">'. $item['judge'] .'</td>';
+                       $htm = $htm . '<td style = "text-align:center;background-color: #f00f0f; color:white;">'. $item['judge'] .'</td>';
                     }
                     
                 }else{
