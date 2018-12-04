@@ -56,11 +56,11 @@ $this->registerJs($script, $position);
 
 		<p id = "view-staturohs">
 			<?php 
-				if(Yii::$app->user->identity != null){
+				/*if(Yii::$app->user->identity != null){
 					if (Yii::$app->user->identity->admin == 1){
 						echo Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ;
 					}
-				}
+				}*/
 				
 			?>
 			
@@ -78,7 +78,7 @@ $this->registerJs($script, $position);
 
 
 
-		<?php if($model->status == 'NG'){
+		<?php /*if($model->status == 'NG'){
 				echo DetailView::widget([
 				'model' => $model,
 				'attributes' => [
@@ -102,7 +102,10 @@ $this->registerJs($script, $position);
 					],
 				],
 			  ]);
-			}
+			}*/
+			echo '<h5><b>Progress</b></h5><div class="progress">
+				  <div class="progress-bar progress-bar-success progress-bar-striped " role="progressbar" style="width:'. $numConcluido .'%;" aria-valuenow="'. $numConcluido .'" aria-valuemin="0" aria-valuemax="100">'.$numConcluido.'%</div>
+				</div>';
 			 ?>	
 			
 
@@ -110,7 +113,7 @@ $this->registerJs($script, $position);
 	        <input type="button" id="gerar_dias" value="Click" style="display: none;"> 
 	        <br>
 	        <table id="days-header" class="table  table-striped table-hover "><thead style="background-color:#b71c1c;color:#fff">
-	            <?php echo $teste?>
+	            <?php echo $items?>
 	        </table>
 	    </div>
 

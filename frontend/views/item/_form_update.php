@@ -14,9 +14,12 @@ $script = <<< JS
 		        var texto_nome = $('#days-header').find('tbody tr:nth-child(1) td:nth-child(1)').data('nome');
 	            var id = $('#days-header').find('tbody tr:nth-child(1) td:nth-child(1)').data('id');
 	            var selValue = $('input[name=radios_' + texto_nome +']:checked').data('date'); 
+	            var data_old = $('thead').data('date');
+	            var comentario = $("#item-comentario").val();
+	            $("#item-comentario").val("");
 
-				data_arr = JSON.stringify({id: id ,data:selValue });
-	                
+				data_arr = JSON.stringify({id: id ,data:selValue, data_old : data_old,item_comentario:comentario});
+	            
 	            $.ajax({
 	                url: '?r=item/updatedata',
 	                type: 'post',

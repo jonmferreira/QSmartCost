@@ -86,35 +86,37 @@ class ItemController extends Controller
 
         $result = $command->queryAll();
 
-       
-        $htm = '<thead style="background-color:#b71c1c;color:#fff;text-align:center;"><td>Sample name</td><td>Cd_Judge</td><td>Pb_Judge</td><td>Hg_Judge</td><td>Br_Judge</td><td>Cr_Judge</td><td></td></thead>';
-        $htm = $htm.'<tbody>';
+        $htm = '';
 
         if($situacao == 'NÃO_REALIZADO'){
             $aux = 'disabled';
+            
         }else{
             $aux = '';
+            $htm = '<thead style="background-color:#b71c1c;color:#fff;text-align:center;"><td>Sample name</td><td>Cd_Judge</td><td>Pb_Judge</td><td>Hg_Judge</td><td>Br_Judge</td><td>Cr_Judge</td><td></td></thead>';
+            $htm = $htm.'<tbody>';
+            foreach ($result as $item) {
+                $htm = $htm.'<tr><td><a><h5>'. $item['nome'] . '</h5>';
+
+                if($item['cd_judge'] == "O.K.") $htm = $htm.'<td style="text-align:center;background-color: #32CD32;vertical-align:middle; color:white;">O.K.</td>';
+                else $htm = $htm.'<td style="text-align:center;background-color: red; color:white;vertical-align:middle">N.G.</td>';
+                if($item['pb_judge'] == "O.K.") $htm = $htm.'<td style="text-align:center;background-color: #32CD32; color:white;vertical-align:middle">O.K.</td>';
+                else $htm = $htm.'<td style="text-align:center;background-color: red; color:white;vertical-align:middle">N.G.</td>';
+                if($item['hg_judge'] == "O.K.") $htm = $htm.'<td style="text-align:center;background-color: #32CD32; color:white;vertical-align:middle">O.K.</td>';
+                else $htm = $htm.'<td style="text-align:center;background-color: red; color:white;vertical-align:middle">N.G.</td>'; 
+                if($item['br_judge'] == "O.K.") $htm = $htm.'<td style="text-align:center;background-color: #32CD32; color:white;vertical-align:middle">O.K.</td>';
+                else $htm = $htm.'<td style="text-align:center;background-color: red; color:white;vertical-align:middle">N.G.</td>';
+                if($item['cr_judge'] == "O.K.") $htm = $htm.'<td style="text-align:center;background-color: #32CD32; color:white;vertical-align:middle">O.K.</td>';
+                else $htm = $htm.'<td style="text-align:center;background-color: red; color:white;vertical-align:middle">N.G.</td>';
+
+                $htm = $htm.'</a></td><td><a href = "http://localhost:85/ReportsFiles/' . $item['data_teste'] . '_'. $item['sample_no'] .'_'. $item['nome'] .'_' .$nome .'.xls"><button class="btn btn-primary"'. $aux .'>Report</button></a></td></tr>';
+
+                    /*$htm = $htm.'<tr><td><a><h5>'. $item['nome'] . '</h5></a></td><td><a href = "http://localhost:85/QSmartCost/exportarPDF.php?nome=' . $item['data_teste'] . '_'. $item['sample_no'] .'_'. $item['nome'] .'_' .$nome .'.html"><button class="btn btn-primary"'. $aux .'>Report</button></a></td></tr>';*/
+            }
+            $htm = $htm.'</tbody>';
         }
 
-        foreach ($result as $item) {
-            $htm = $htm.'<tr><td><a><h5>'. $item['nome'] . '</h5>';
-
-            if($item['cd_judge'] == "O.K.") $htm = $htm.'<td style="text-align:center;background-color: #32CD32;vertical-align:middle; color:white;">O.K.</td>';
-            else $htm = $htm.'<td style="text-align:center;background-color: red; color:white;vertical-align:middle">N.G.</td>';
-            if($item['pb_judge'] == "O.K.") $htm = $htm.'<td style="text-align:center;background-color: #32CD32; color:white;vertical-align:middle">O.K.</td>';
-            else $htm = $htm.'<td style="text-align:center;background-color: red; color:white;vertical-align:middle">N.G.</td>';
-            if($item['hg_judge'] == "O.K.") $htm = $htm.'<td style="text-align:center;background-color: #32CD32; color:white;vertical-align:middle">O.K.</td>';
-            else $htm = $htm.'<td style="text-align:center;background-color: red; color:white;vertical-align:middle">N.G.</td>'; 
-            if($item['br_judge'] == "O.K.") $htm = $htm.'<td style="text-align:center;background-color: #32CD32; color:white;vertical-align:middle">O.K.</td>';
-            else $htm = $htm.'<td style="text-align:center;background-color: red; color:white;vertical-align:middle">N.G.</td>';
-            if($item['cr_judge'] == "O.K.") $htm = $htm.'<td style="text-align:center;background-color: #32CD32; color:white;vertical-align:middle">O.K.</td>';
-            else $htm = $htm.'<td style="text-align:center;background-color: red; color:white;vertical-align:middle">N.G.</td>';
-
-            $htm = $htm.'</a></td><td><a href = "http://localhost:85/ReportsFiles/' . $item['data_teste'] . '_'. $item['sample_no'] .'_'. $item['nome'] .'_' .$nome .'.xls"><button class="btn btn-primary"'. $aux .'>Report</button></a></td></tr>';
-
-            /*$htm = $htm.'<tr><td><a><h5>'. $item['nome'] . '</h5></a></td><td><a href = "http://localhost:85/QSmartCost/exportarPDF.php?nome=' . $item['data_teste'] . '_'. $item['sample_no'] .'_'. $item['nome'] .'_' .$nome .'.html"><button class="btn btn-primary"'. $aux .'>Report</button></a></td></tr>';*/
-        }
-        $htm = $htm.'</tbody>';
+        
         
        
 
@@ -203,6 +205,10 @@ class ItemController extends Controller
             $sql = "update item set data_teste = '". $json_obj['data'] ."' WHERE id = " . $json_obj['id'];
             
             $command = $connection->createCommand($sql)->execute();
+
+
+            $command = $connection->createCommand("insert into data_teste_old(data_old,item,comentario) values('".$json_obj['data_old'] ."',". $json_obj['id'] .",'". $json_obj['item_comentario'] ."')")->execute();
+
         }
     }
 

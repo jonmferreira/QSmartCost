@@ -71,11 +71,32 @@ class StatusrohsController extends Controller
     public function actionView($id)
     {
         return $this->render('view', [
-            'model' => $this->findModel($id),'teste' => $this->teste($id,$this->findModel($id)['month'])
+            'model' => $this->findModel($id),'items' => $this->getItems($id,$this->findModel($id)['month']),'numConcluido' => $this->getNumConcluido($id)
         ]);
     }
 
-    public function teste($id,$month){
+    public function getNumConcluido($id){
+        $connection = Yii::$app->getDb();
+        $command = $connection->createCommand("SELECT COUNT(id) FROM item WHERE statusrohs = " . $id);
+
+        $result = $command->queryAll();
+        foreach ($result as $perk) {
+            $total = $perk['COUNT(id)'];
+            break;
+        }
+
+        $command = $connection->createCommand("SELECT COUNT(id) FROM item WHERE situacao = 'REALIZADO'and statusrohs = " . $id);
+
+        $result = $command->queryAll();
+        foreach ($result as $perk) {
+            $totalRealizado = $perk['COUNT(id)'];
+            break;
+        }
+
+        return (($totalRealizado*100)/$total);
+    }
+
+    public function getItems($id,$month){
         $connection = Yii::$app->getDb();
 
     
@@ -112,6 +133,11 @@ class StatusrohsController extends Controller
             $htm = $htm.'</tr></thead><tbody>';
 
             foreach ($result as $item) {
+
+                $command = $connection->createCommand("SELECT * FROM data_teste_old WHERE item = " . $item['id']);
+
+                $datas_old_result = $command->queryAll();
+
                 $htm = $htm . '<tr><td> <a class = "botao-item" href="'. Url::to('?r=item/view&id='. $item['id'] ) .'&idstatus='. $id .'">' . $item['nome'] . ' </a></td>';
 
                 if($item['situacao'] == "REALIZADO"){
@@ -145,7 +171,17 @@ class StatusrohsController extends Controller
                             ';
                         }
                     }else{
-
+                        foreach ($datas_old_result as $data_old) {
+                            if($datas_total[$i] == $data_old['data_old']){
+                                 $htm = $htm .'
+                                    <td>
+                                        <button type="button" class="btn example-popover" styledata-container="body" style = "height: 25px ;border-radius: 50px; background-color: #696969;" data-toggle="popover" data-placement="top" data-content="'. $data_old['comentario'] . '">
+                                        </button>
+                                    </td>
+                                ';
+                                break;
+                            }
+                        }
                         $htm = $htm .'
                             <td>
 

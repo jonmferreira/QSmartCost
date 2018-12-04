@@ -32,13 +32,13 @@ $this->params['breadcrumbs'][] = $this->title;
 					['class' => 'yii\grid\SerialColumn'],
 
 					'month',
-					[
+					/*[
 						'attribute' => 'status',
 						'contentOptions' => function ($model, $key, $index, $column) {
 							return ['style' => 'color:' 
 								. ($model->status == 'PENDING'?'#e6b800': ($model->status == 'APPROVED'?'green':'red'))];
 						},
-					],
+					],*/
 					['class' => 'yii\grid\ActionColumn',                        
 								'template' => '{view} {start} {stop} {edit} {delete} {barra}',                        
 								'buttons' => [

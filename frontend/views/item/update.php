@@ -36,7 +36,7 @@ $this->title = 'Update: ' . $model->nome;
                $list[] = date('Y-m-d-D', $i);
             }  
 
-            $htm = '<thead style="background-color:#b71c1c;color:#fff">
+            $htm = '<thead style="background-color:#b71c1c;color:#fff" data-date ='. $model->data_teste .'>
                     <tr >
                         <th></th>
             ';
@@ -83,7 +83,7 @@ $this->title = 'Update: ' . $model->nome;
         ?>
 
 	    <?= $this->render('_form_update', [
-	        'model' => $model,'htm' => $htm
+	        'model' => $model,'htm' => $htm,'data_teste' => $model->data_teste
 	    ]) ?>
 	</div>
 
