@@ -10,6 +10,49 @@ use yii\grid\GridView;
 $this->title = 'StatusRoHS';
 $this->params['breadcrumbs'][] = $this->title;
 
+$script = <<< JS
+
+  $(document).ready(function(){
+
+         
+
+  });
+
+  /*google.charts.load('current', {'packages':['bar']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Month', 'Plan', 'Result'],
+          ['2014', 1000, 400],
+          ['2015', 1170, 460],
+          ['2016', 660, 1120],
+          ['2017', 1030, 540],
+           ['2014', 1000, 400],
+          ['2015', 1170, 460],
+          ['2016', 660, 1120],
+          ['2017', 1030, 540],
+           ['2014', 1000, 400],
+          ['2015', 1170, 460]
+        ]);
+
+        var options = {
+          chart: {
+            title: 'XRF Performance',
+            subtitle: 'Plan and Result',
+          }
+        };
+
+        var chart = new google.charts.Bar(document.getElementById('columnchart_material'));
+
+        chart.draw(data, google.charts.Bar.convertOptions(options));
+      }*/
+
+JS;
+$position = \yii\web\View::POS_READY;
+$this->registerJs($script, $position);
+$this->registerJsFile('https://www.gstatic.com/charts/loader.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
+
 ?>
 
 </br>
@@ -21,9 +64,11 @@ $this->params['breadcrumbs'][] = $this->title;
 			</div>
 			<?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
-			<p>
+			 <p>
 				<?= Html::a('Create StatusRoHS', ['create'], ['class' => 'btn btn-success']) ?>
-			</p>
+			</p> 
+
+			<!-- <div id="columnchart_material" style="width: 100%; height: 300px;"></div>	 -->
 
 			<?php echo GridView::widget([
 				'dataProvider' => $dataProvider,

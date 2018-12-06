@@ -42,7 +42,7 @@ $script = <<< JS
 
 JS;
 $position = \yii\web\View::POS_READY;
-$this->registerJs($script, $position);
+$this->registerJs($script, $position);	
 
 ?>
 </br>

@@ -93,7 +93,7 @@ class StatusrohsController extends Controller
             break;
         }
 
-        return (($totalRealizado*100)/$total);
+        return ceil((($totalRealizado*100)/$total));
     }
 
     public function getNumPlan($id){
