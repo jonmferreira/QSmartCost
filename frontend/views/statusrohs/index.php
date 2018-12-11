@@ -64,13 +64,13 @@ $this->registerJsFile('https://www.gstatic.com/charts/loader.js', ['depends' => 
 			</div>
 			<?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
-			 <p>
+			 <!-- <p>
 				<?= Html::a('Create StatusRoHS', ['create'], ['class' => 'btn btn-success']) ?>
-			</p> 
+			</p>  -->
 
 			<!-- <div id="columnchart_material" style="width: 100%; height: 300px;"></div>	 -->
 
-			<?php echo GridView::widget([
+			<!-- <?php echo GridView::widget([
 				'dataProvider' => $dataProvider,
 				'filterModel' => $searchModel,
 				'columns' => [
@@ -115,6 +115,16 @@ $this->registerJsFile('https://www.gstatic.com/charts/loader.js', ['depends' => 
 								],
 					],
 				],
-			]); ?>
+			]); ?> -->
+
+			<select class="form-control" style = "width: 15%;">
+			  <option>2018</option>
+			  <option>2019</option>
+			</select>
+			<br>
+			<br>
+			<?php
+				echo '<div class="row">'.$months. '</div>';
+			?>
 		</div>
 </div>

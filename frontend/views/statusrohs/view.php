@@ -106,9 +106,13 @@ $this->registerJs($script, $position);
 			echo '<h5 style="display:inline;"><b>Plan: </b></h5> <p style="display:inline;">'. $numPlan .'</p>&ensp;&ensp;';
 
 			echo '<h5 style="display:inline;"><b>Result: </b></h5><p style="display:inline;">'. $numResult .'</p>';
-			echo '<br>';
-			echo '<h5 style="display:inline-block;"><b>Progress</b></h5><div style="display:inline-block;float:right;"> 
-					<button type="button" class="btn example-popover" styledata-container="body" style = "height: 25px ;border-radius: 50px; background-color: #696969;" data-toggle="popover" data-placement="top" data-content="">
+			echo '<h5><b>Progress</b></h5>';
+			echo '<div class="progress" style = "width:60%;display:inline-block">
+
+				  <div class="progress-bar progress-bar-success " role="progressbar" style="width:'. $numConcluido .'%;" aria-valuenow="'. $numConcluido .'" aria-valuemin="0" aria-valuemax="100">'.$numConcluido.'%</div>
+				</div>';
+			echo '<div style="display:inline-block;float:right;"> 
+					<button type="button" class="btn example-popover " styledata-container="body" style = "height: 25px ;border-radius: 50px; background-color: #696969;" data-toggle="popover" data-placement="top" data-content="">
                     </button>&ensp;Data alterada</div>';
             echo '<div style="display:inline-block;float:right;"> 
 					<button type="button" class="btn btn-light example-popover" styledata-container="body" style = "height: 25px ;border-radius: 50px;" data-toggle="popover" data-placement="top" data-content="">
@@ -116,11 +120,6 @@ $this->registerJs($script, $position);
             echo '<div style="display:inline-block;float:right;"> 
 					<button type="button" class="btn btn-success example-popover" styledata-container="body" style = "height: 25px ;border-radius: 50px;" data-placement="top" data-content="">
                     </button>&ensp;Realizado&ensp;&ensp;</div>';
-
-            echo '<div class="progress">
-
-				  <div class="progress-bar progress-bar-success " role="progressbar" style="width:'. $numConcluido .'%;" aria-valuenow="'. $numConcluido .'" aria-valuemin="0" aria-valuemax="100">'.$numConcluido.'%</div>
-				</div>';
 			 ?>	
 			
 
