@@ -93,21 +93,21 @@ class ItemController extends Controller
             
         }else{
             $aux = '';
-            $htm = '<thead style="background-color:#b71c1c;color:#fff;text-align:center;"><td>Sample name</td><td>Cd_Judge</td><td>Pb_Judge</td><td>Hg_Judge</td><td>Br_Judge</td><td>Cr_Judge</td><td></td></thead>';
+            $htm = '<thead style="background-color:#696969;color:#fff;text-align:center;"><td>Sample name</td><td>Cd Judge</td><td>Pb Judge</td><td>Hg Judge</td><td>Br Judge</td><td>Cr Judge</td><td></td></thead>';
             $htm = $htm.'<tbody>';
             foreach ($result as $item) {
                 $htm = $htm.'<tr><td><a><h5>'. $item['nome'] . '</h5>';
 
-                if($item['cd_judge'] == "O.K.") $htm = $htm.'<td style="text-align:center;background-color: #32f032;vertical-align:middle; color:white;">O.K.</td>';
-                else $htm = $htm.'<td style="text-align:center;background-color:  #f00f0f; color:white;vertical-align:middle">N.G.</td>';
-                if($item['pb_judge'] == "O.K.") $htm = $htm.'<td style="text-align:center;background-color: #32f032; color:white;vertical-align:middle">O.K.</td>';
-                else $htm = $htm.'<td style="text-align:center;background-color: #f00f0f; color:white;vertical-align:middle">N.G.</td>';
-                if($item['hg_judge'] == "O.K.") $htm = $htm.'<td style="text-align:center;background-color: #32f032; color:white;vertical-align:middle">O.K.</td>';
-                else $htm = $htm.'<td style="text-align:center;background-color:  #f00f0f; color:white;vertical-align:middle">N.G.</td>'; 
-                if($item['br_judge'] == "O.K.") $htm = $htm.'<td style="text-align:center;background-color: #32f032; color:white;vertical-align:middle">O.K.</td>';
-                else $htm = $htm.'<td style="text-align:center;background-color:  #f00f0f; color:white;vertical-align:middle">N.G.</td>';
-                if($item['cr_judge'] == "O.K.") $htm = $htm.'<td style="text-align:center;background-color: #32f032; color:white;vertical-align:middle">O.K.</td>';
-                else $htm = $htm.'<td style="text-align:center;background-color:  #f00f0f; color:white;vertical-align:middle">N.G.</td>';
+                if($item['cd_judge'] == "O.K.") $htm = $htm.'<td><div style="height: 50px; text-align:center;background-color: #32f032;padding-top:14px;border-radius: 20px;"><b>OK</b></div></td>';
+                else $htm = $htm.'<td><div style="height: 50px; text-align:center;background-color: #f00f0f; color:white;padding-top:14px;border-radius: 20px;"><b>NG</b></div></td>';
+                if($item['pb_judge'] == "O.K.") $htm = $htm.'<td><div style="height: 50px; text-align:center;background-color: #32f032;padding-top:14px;border-radius: 20px;"><b>OK</b></div></td>';
+                else $htm = $htm.'<td><div style="height: 50px; text-align:center;background-color: #f00f0f; color:white;padding-top:14px;border-radius: 20px;"><b>NG</b></div></td>';
+                if($item['hg_judge'] == "O.K.") $htm = $htm.'<td><div style="height: 50px; text-align:center;background-color: #32f032;padding-top:14px;border-radius: 20px;"><b>OK</b></div></td>';
+                else $htm = $htm.'<td><div style="height: 50px; text-align:center;background-color: #f00f0f; color:white;padding-top:14px;border-radius: 20px;"><b>NG</b></div></td>'; 
+                if($item['br_judge'] == "O.K.") $htm = $htm.'<td><div style="height: 50px; text-align:center;background-color: #32f032;padding-top:14px;border-radius: 20px;"><b>OK</b></div></td>';
+                else $htm = $htm.'<td><div style="height: 50px; text-align:center;background-color: #f00f0f; color:white;padding-top:14px;border-radius: 20px;"><b>NG</b></div></td>';
+                if($item['cr_judge'] == "O.K.") $htm = $htm.'<td><div style="height: 50px; text-align:center;background-color: #32f032;padding-top:14px;border-radius: 20px;"><b>OK</b></div></td>';
+                else $htm = $htm.'<td><div style="height: 50px; text-align:center;background-color: #f00f0f; color:white;padding-top:14px;border-radius: 20px;"><b>NG</b></div></td>';
 
                 $htm = $htm.'</a></td><td><a href = "http://localhost:85/ReportsFiles/' . $item['data_teste'] . '_'. $item['sample_no'] .'_'. $item['nome'] .'_' .$nome .'.xls"><button class="btn btn-primary"'. $aux .'>Report</button></a></td></tr>';
 

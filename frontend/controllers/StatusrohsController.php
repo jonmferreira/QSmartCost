@@ -139,7 +139,7 @@ class StatusrohsController extends Controller
             $list = $this->getDatas($month);
 
             //$htm= '<table class="table table-bordered" ><tr>';
-            $htm = '<thead style="background-color:#b71c1c;color:#fff">
+            $htm = '<thead style="background-color:#696969;color:#fff;">
                     <tr >
                         <th></th><th>Judge</th>
             ';
@@ -168,10 +168,12 @@ class StatusrohsController extends Controller
                 $htm = $htm . '<tr><td> <a class = "botao-item" href="'. Url::to('?r=item/view&id='. $item['id'] ) .'&idstatus='. $id .'">' . $item['nome'] . ' </a></td>';
 
                 if($item['situacao'] == "REALIZADO"){
-                    if($item['judge'] == "O.K."){   
-                       $htm = $htm . '<td style = "text-align:center;background-color: #32f032; color:white;">'. $item['judge'] .'</td>';
+                    if($item['judge'] == "O.K."){  
+
+                       $htm = $htm . '<td><div style="height: 40px; text-align:center;background-color: #32f032;padding-top:10px;border-radius: 16px;"><b>'. str_replace(".","",$item['judge']) .'</b></div></td>';
                     }else{
-                       $htm = $htm . '<td style = "text-align:center;background-color: #f00f0f; color:white;">'. $item['judge'] .'</td>';
+                       $htm = $htm . '<td><div style="height: 40px; text-align:center;background-color: #f00f0f;color:white;padding-top:10px;border-radius: 16px;"><b>'. str_replace(".","",$item['judge']) .'</b></div></td>';
+
                     }
                     
                 }else{
@@ -184,14 +186,14 @@ class StatusrohsController extends Controller
                     if($datas_total[$i] == $item['data_teste']){
                         if($item['situacao'] == 'REALIZADO'){
                              $htm = $htm .'
-                                <td >
+                                <td style="padding-left:14px;">
                                     <button type="button" class="btn btn-success example-popover" styledata-container="body" style = "height: 25px ;border-radius: 50px;" data-placement="top" data-content="">
                                     </button>  
                                 </td>
                             ';
                         }else{
                             $htm = $htm .'
-                                <td>
+                                <td style="padding-left:14px;">
                                     <button type="button" class="btn btn-light example-popover" styledata-container="body" style = "height: 25px ;border-radius: 50px;" data-toggle="popover" data-placement="top" data-content="'. $item['comentario'] . '">
                                     </button>
                                 </td>
@@ -201,7 +203,7 @@ class StatusrohsController extends Controller
                         foreach ($datas_old_result as $data_old) {
                             if($datas_total[$i] == $data_old['data_old']){
                                  $htm = $htm .'
-                                    <td>
+                                    <td style="padding-left:14px;">
                                         <button type="button" class="btn example-popover" styledata-container="body" style = "height: 25px ;border-radius: 50px; background-color: #696969;" data-toggle="popover" data-placement="top" data-content="'. $data_old['comentario'] . '">
                                         </button>
                                     </td>
