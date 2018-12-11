@@ -14,9 +14,35 @@ $script = <<< JS
 
   $(document).ready(function(){
 
-         
+        $.ajax({
+            url: '?r=statusrohs/getanos',
+            type: 'get',
+            success: function (data) {
+            	$('#container').html(data);
+            },
+            error: function(xhr, ajaxOptions, thrownError){
+            	alert(thrownError);
+            }
+          }); 
+
+       
 
   });
+
+  $(document).on('change','select',function(){
+  		var path = '?r=statusrohs/getmonths&ano=';
+        var path = path.concat($('select').val());
+        $.ajax({
+            url: path,
+            type: 'get',
+            success: function (data) {
+            	$('#cards').html(data);
+            },
+            error: function(xhr, ajaxOptions, thrownError){
+            	alert(thrownError);
+            }
+          }); 
+   });
 
   /*google.charts.load('current', {'packages':['bar']});
       google.charts.setOnLoadCallback(drawChart);
@@ -117,14 +143,11 @@ $this->registerJsFile('https://www.gstatic.com/charts/loader.js', ['depends' => 
 				],
 			]); ?> -->
 
-			<select class="form-control" style = "width: 15%;">
-			  <option>2018</option>
-			  <option>2019</option>
-			</select>
-			<br>
-			<br>
-			<?php
-				echo '<div class="row">'.$months. '</div>';
-			?>
+			
+
+			
+			<div id="container">
+			</div>
+			
 		</div>
 </div>

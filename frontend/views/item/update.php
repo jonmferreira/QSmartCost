@@ -36,7 +36,7 @@ $this->title = 'Update: ' . $model->nome;
                $list[] = date('Y-m-d-D', $i);
             }  
 
-            $htm = '<thead style="background-color:#b71c1c;color:#fff" data-date ='. $model->data_teste .'>
+            $htm = '<thead style="background-color:#696969;color:#fff" data-date ='. $model->data_teste .'>
                     <tr >
                         <th></th>
             ';
@@ -57,6 +57,8 @@ $this->title = 'Update: ' . $model->nome;
             $htm = $htm.'</tr></thead><tbody>';
             $trim = str_replace(" ","",$model->nome );
             $trim = str_replace(",","",$trim );
+            $trim = str_replace("(","",$trim );
+            $trim = str_replace(")","",$trim );
             $htm = $htm . '<tr><td style = "padding-top:18px;" data-id = "'. $model->id .'" data-nome = "'.$trim.'">' . $model->nome . '</td>';
 			$i = 0;
             foreach ($dias_total as $dia) {

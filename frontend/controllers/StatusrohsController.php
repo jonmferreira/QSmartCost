@@ -58,14 +58,13 @@ class StatusrohsController extends Controller
 
         return $this->render('index', [
             'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-            'months'=> $this->getMonths()
+            'dataProvider' => $dataProvider
         ]);
     }
 
-    public function getMonths(){
+    public function actionGetmonths($ano){
         $connection = Yii::$app->getDb();
-        $command = $connection->createCommand("SELECT * FROM statusrohs order by id desc");
+        $command = $connection->createCommand("SELECT * FROM statusrohs where month like '%". substr($ano,-2) ."' order by id desc");
 
         $result = $command->queryAll();
         $html = '';
@@ -82,6 +81,21 @@ class StatusrohsController extends Controller
                      </div>';
             
         }
+
+        return $html;
+    }
+
+    public function actionGetanos(){
+        $connection = Yii::$app->getDb();
+        $command = $connection->createCommand("SELECT DISTINCT year(data_teste) as ano FROM item ORDER BY year(data_teste) DESC");
+
+        $result = $command->queryAll();
+        $html = '<select  class="form-control" style = "width: 15%;">';
+        foreach ($result as $perk) {
+            $html .= '<option>'. $perk['ano'] .'</option>';
+        }
+        $html .= '</select><br><br>';
+        $html .= '<div id="cards" class="row">'. $this->actionGetMonths($result[0]['ano']) . '</div>';
 
         return $html;
     }
@@ -172,12 +186,12 @@ class StatusrohsController extends Controller
             $datas_total = array();
             foreach ($list as $data) {
                 //print_r(substr($data,-3));
-                if(!(substr($data,-3) == 'Sun' || substr($data,-3) == 'Sat')){
+                //if(!(substr($data,-3) == 'Sun' || substr($data,-3) == 'Sat')){
                     $htm = $htm . '<th style="text-align:center">'. substr($data, -6,-4) .'</th>';
                     //print_r($data." ");
                     array_push($dias_total,substr($data, -6,-4));
                     array_push($datas_total,substr($data,0,-4));
-                }
+                //}
                 
             }
 

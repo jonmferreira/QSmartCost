@@ -123,14 +123,13 @@ $this->registerJs($script, $position);
 			 ?>	
 			
 
-		<div class="table-responsive">
+		<div class="table-responsive" style="width: 100%;">
 	        <input type="button" id="gerar_dias" value="Click" style="display: none;"> 
 	        <br>
 	        <table id="days-header" class="table  table-striped table-hover ">
 	            <?php echo $items?>
 	        </table>
 	    </div>
-
 		
 	</div>
 
