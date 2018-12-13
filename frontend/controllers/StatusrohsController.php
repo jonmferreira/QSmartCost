@@ -62,6 +62,25 @@ class StatusrohsController extends Controller
         ]);
     }
 
+    public function actionGetmonthschart($ano){
+        $connection = Yii::$app->getDb();
+        $command = $connection->createCommand("SELECT * FROM statusrohs where month like '%". substr($ano,-2) ."' order by id desc");
+
+        $result = $command->queryAll();
+        $lista = array();
+        foreach ($result as $perk) {
+            $month = array(
+                "month" => $perk['month'],
+                "plan" =>  $this->getNumPlan($perk['id']),
+                "result" => $this->getNumResult($perk['id']),
+                "numcluido" => $this->getNumConcluido($perk['id'])
+            );
+            array_push($lista, $month);
+        }
+
+        return json_encode($lista);
+    }
+
     public function actionGetmonths($ano){
         $connection = Yii::$app->getDb();
         $command = $connection->createCommand("SELECT * FROM statusrohs where month like '%". substr($ano,-2) ."' order by id desc");
@@ -95,6 +114,7 @@ class StatusrohsController extends Controller
             $html .= '<option>'. $perk['ano'] .'</option>';
         }
         $html .= '</select><br><br>';
+        //$html .= '<div id="grafico" style="padding: 0px; width: 100%; height: 300px;"></div>';
         $html .= '<div id="cards" class="row">'. $this->actionGetMonths($result[0]['ano']) . '</div>';
 
         return $html;

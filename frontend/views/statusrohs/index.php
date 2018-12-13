@@ -11,6 +11,7 @@ $this->title = 'StatusRoHS';
 $this->params['breadcrumbs'][] = $this->title;
 
 $script = <<< JS
+	google.charts.load('current', {'packages':['bar', 'corechart', 'table']});
 
   $(document).ready(function(){
 
@@ -19,15 +20,30 @@ $script = <<< JS
             type: 'get',
             success: function (data) {
             	$('#container').html(data);
+            	var ano = $('select').val();
+            	var path = '?r=statusrohs/getmonthschart&ano=';
+		        var path = path.concat(ano);
+		        $.ajax({
+		            url: path,
+		            type: 'get',
+		            success: function (data) {
+		            	var lista = JSON.parse(data);
+
+		            	drawChart(lista);
+		            },
+		            error: function(xhr, ajaxOptions, thrownError){
+		            	alert(thrownError);
+		            }
+		        }); 
             },
             error: function(xhr, ajaxOptions, thrownError){
             	alert(thrownError);
             }
-          }); 
+        }); 
 
-       
-
+        
   });
+
 
   $(document).on('change','select',function(){
   		var path = '?r=statusrohs/getmonths&ano=';
@@ -42,25 +58,33 @@ $script = <<< JS
             	alert(thrownError);
             }
           }); 
+        var path = '?r=statusrohs/getmonthschart&ano=';
+        var path = path.concat($('select').val());
+        $.ajax({
+            url: path,
+            type: 'get',
+            success: function (data) {
+            	var lista = JSON.parse(data);
+            	
+            	drawChart(lista);
+            },
+            error: function(xhr, ajaxOptions, thrownError){
+            	alert(thrownError);
+            }
+        }); 
    });
 
-  /*google.charts.load('current', {'packages':['bar']});
-      google.charts.setOnLoadCallback(drawChart);
 
-      function drawChart() {
-        var data = google.visualization.arrayToDataTable([
-          ['Month', 'Plan', 'Result'],
-          ['2014', 1000, 400],
-          ['2015', 1170, 460],
-          ['2016', 660, 1120],
-          ['2017', 1030, 540],
-           ['2014', 1000, 400],
-          ['2015', 1170, 460],
-          ['2016', 660, 1120],
-          ['2017', 1030, 540],
-           ['2014', 1000, 400],
-          ['2015', 1170, 460]
-        ]);
+  
+
+      function drawChart(lista) {
+      	//alert(JSON.parse(lista[0]));
+      	var valores = [['Month', 'Plan', 'Result']];
+	    for(i = 0; i < lista.length; i++){
+	        valores.push([lista[i]['month'],parseFloat(lista[i]['plan']),parseFloat(lista[i]['result'])]);
+	    }
+        var data = google.visualization.arrayToDataTable(valores);
+        
 
         var options = {
           chart: {
@@ -69,10 +93,10 @@ $script = <<< JS
           }
         };
 
-        var chart = new google.charts.Bar(document.getElementById('columnchart_material'));
+        var chart = new google.charts.Bar(document.getElementById('grafico'));
 
         chart.draw(data, google.charts.Bar.convertOptions(options));
-      }*/
+      }
 
 JS;
 $position = \yii\web\View::POS_READY;
@@ -145,6 +169,7 @@ $this->registerJsFile('https://www.gstatic.com/charts/loader.js', ['depends' => 
 
 			
 
+			<!-- <div id="grafico" style="padding: 0px; width: 100%; height: 300px;"></div> -->
 			
 			<div id="container">
 			</div>
