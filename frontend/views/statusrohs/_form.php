@@ -61,11 +61,8 @@ $script = <<< JS
                     itemsJson.push(item);
                 }
                 
-                //itemsJson = JSON.stringify(itemsJson);
-                //alert(JSON.stringify(itemsJson));
-                //alert(texto);
                 data_arr = JSON.stringify({month:$('#myInput').val(),items:itemsJson});
-                //alert(data_arr);
+                
                 $.ajax({
                      url: '?r=statusrohs/create2',
                      type: 'post',

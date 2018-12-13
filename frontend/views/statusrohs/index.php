@@ -14,6 +14,8 @@ $script = <<< JS
 	google.charts.load('current', {'packages':['bar', 'corechart', 'table']});
 
   $(document).ready(function(){
+      	
+      
 
         $.ajax({
             url: '?r=statusrohs/getanos',
@@ -41,7 +43,8 @@ $script = <<< JS
             }
         }); 
 
-        
+
+
   });
 
 
@@ -58,7 +61,7 @@ $script = <<< JS
             	alert(thrownError);
             }
           }); 
-        var path = '?r=statusrohs/getmonthschart&ano=';
+        /*var path = '?r=statusrohs/getmonthschart&ano=';
         var path = path.concat($('select').val());
         $.ajax({
             url: path,
@@ -71,14 +74,13 @@ $script = <<< JS
             error: function(xhr, ajaxOptions, thrownError){
             	alert(thrownError);
             }
-        }); 
+        }); */
    });
 
 
   
 
       function drawChart(lista) {
-      	//alert(JSON.parse(lista[0]));
       	var valores = [['Month', 'Plan', 'Result']];
 	    for(i = 0; i < lista.length; i++){
 	        valores.push([lista[i]['month'],parseFloat(lista[i]['plan']),parseFloat(lista[i]['result'])]);
