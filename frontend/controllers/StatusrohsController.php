@@ -92,7 +92,11 @@ class StatusrohsController extends Controller
                         <div class="thumbnail" style="width: 15rem;">
                           
                           <div class="caption">
+                            <div class="progress" style = "margin-left: 16px; margin-right: 16px;">
+                              <div class="progress-bar progress-bar-success " role="progressbar" style="width:'. $this->getNumConcluido($perk['id']) .'%;" aria-valuenow="'. $this->getNumConcluido($perk['id']) .'" aria-valuemin="0" aria-valuemax="100">'.$this->getNumConcluido($perk['id']).'%</div>
+                            </div>
                             <h5 class="card-title" style="text-align:center;"><b>'. $perk['month'] .'</b></h5>
+                            
                             <a href='. Url::to('?r=statusrohs/view&id='. $perk['id'] ) .' style = "margin-left:1.8rem;"><button class="btn btn-default"><span class="fa fa-eye"></span></button></a>
                             <a href='. Url::to('?r=statusrohs/delete&id='. $perk['id'] ) .' data-confirm="Tem certeza que deseja apagar '. $perk['month'] .'?" data-method="post"><button class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span></button></a>
                           </div>
