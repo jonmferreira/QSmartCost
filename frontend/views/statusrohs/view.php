@@ -5,8 +5,7 @@ use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\statusrohs */
-
-$this->title = $model->month;
+$this->title = str_replace("'","' ",$model->month);
 $this->params['breadcrumbs'][] = ['label' => 'StatusRoHS', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 
