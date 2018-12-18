@@ -109,7 +109,7 @@ $this->registerJs($script, $position);
 			echo '<h5><b>Progress</b></h5>';
 			echo '<div class="progress" style = "width:60%;display:inline-block">
 
-				  <div class="progress-bar progress-bar-success " role="progressbar" style="width:'. $numConcluido .'%;" aria-valuenow="'. $numConcluido .'" aria-valuemin="0" aria-valuemax="100">'.$numConcluido.'%</div>
+				  <div class="progress-bar " role="progressbar" style="background-color: #32f032;width:'. $numConcluido .'%;" aria-valuenow="'. $numConcluido .'" aria-valuemin="0" aria-valuemax="100">'.$numConcluido.'%</div>
 				</div>';
 			echo '<div style="display:inline-block;float:right;"> 
 					<button type="button" class="btn example-popover " styledata-container="body" style = "height: 25px ;border-radius: 50px; background-color: #696969;" data-toggle="popover" data-placement="top" data-content="">
@@ -118,7 +118,7 @@ $this->registerJs($script, $position);
 					<button type="button" class="btn btn-light example-popover" styledata-container="body" style = "height: 25px ;border-radius: 50px;" data-toggle="popover" data-placement="top" data-content="">
                     </button>&ensp;Não Realizado&ensp;&ensp;</div>';
             echo '<div style="display:inline-block;float:right;"> 
-					<button type="button" class="btn btn-success example-popover" styledata-container="body" style = "height: 25px ;border-radius: 50px;" data-placement="top" data-content="">
+					<button type="button" class="btn example-popover" styledata-container="body" style = "background-color: #32f032;height: 25px ;border-radius: 50px;" data-placement="top" data-content="">
                     </button>&ensp;Realizado&ensp;&ensp;</div>';
 			 ?>	
 			
