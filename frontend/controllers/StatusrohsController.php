@@ -83,9 +83,38 @@ class StatusrohsController extends Controller
 
     public function actionGetmonths($ano){
         $connection = Yii::$app->getDb();
-        $command = $connection->createCommand("SELECT * FROM statusrohs where month like '%". substr($ano,-2) ."' order by id desc");
+        $command = $connection->createCommand("SELECT * FROM statusrohs where month like '%". substr($ano,-2) ."' order by id asc");
 
         $result = $command->queryAll();
+        /*$html = '<div class="container table-responsive" style="width: 100%;">
+            
+                    <table class="table  table-striped table-hover ">';
+                
+        $html .= '<thead style="background-color:#696969;color:#fff;">
+                    <tr >
+                        <th style="text-align:center"></th>
+            ';
+
+        $array = [
+                "JAN","FEV","MAR","ABR","MAI" ,"JUN","JUL","AGO","SET","OUT",
+                "NOV","DEZ"
+            ];
+
+        for ($j=0; $j < 12; $j++) { 
+            $html .= '<th style="text-align:center">'. $array[$j]. '\' '. substr($ano,-2);
+            foreach ($result as $perk) {
+                if(substr($perk['month'],0,3) == $array[$j]){
+                    $html .= '';
+                    break;
+                }
+            }
+             $html .= '</th>';
+        }
+
+        $html .= '</table>
+                </div>';*/
+
+        
         $html = '';
         foreach ($result as $perk) {
             $html .= '<div class="col-sm-2">
@@ -248,14 +277,14 @@ class StatusrohsController extends Controller
                     if($datas_total[$i] == $item['data_teste']){
                         if($item['situacao'] == 'REALIZADO'){
                              $htm = $htm .'
-                                <td style="vertical-align:middle; padding-left:14px;">
+                                <td style="vertical-align:middle; ">
                                     <button type="button" class="btn example-popover" styledata-container="body" style = "background-color: #32f032;height: 25px ;border-radius: 50px;" data-placement="top" data-content="">
                                     </button>  
                                 </td>
                             ';
                         }else{
                             $htm = $htm .'
-                                <td style="vertical-align:middle; padding-left:14px;">
+                                <td style="vertical-align:middle; ">
                                     <button type="button" class="btn btn-light example-popover" styledata-container="body" style = "height: 25px ;border-radius: 50px;" data-toggle="popover" data-placement="top" data-content="'. $item['comentario'] . '">
                                     </button>
                                 </td>
@@ -265,7 +294,7 @@ class StatusrohsController extends Controller
                         foreach ($datas_old_result as $data_old) {
                             if($datas_total[$i] == $data_old['data_old']){
                                  $htm = $htm .'
-                                    <td style="padding-left:14px;">
+                                    <td style="">
                                         <button type="button" class="btn example-popover" styledata-container="body" style = "height: 25px ;border-radius: 50px; background-color: #696969;" data-toggle="popover" data-placement="top" data-content="'. $data_old['comentario'] . '">
                                         </button>
                                     </td>
@@ -356,7 +385,7 @@ class StatusrohsController extends Controller
             $year = substr($input, 4);
 
             $array = [
-                "JAN" => "01","FEV" => "02","MAR"=>"03","ABR" => "04","MAI" => "05","JUN"=>"06","JUL"=>"07","AGO"=>"08","SET"=>"09","OUT"=>"10",
+                "JAN" => "01","FEV" => "02","MAR"=>"03","ABR" => "04","MAI" => "05","JUN"=>"06","JUL"=>"07  ","AGO"=>"08","SET"=>"09","OUT"=>"10",
                 "NOV" => "11","DEZ"=>"12"
             ];
 
