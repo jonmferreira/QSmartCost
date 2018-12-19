@@ -86,7 +86,7 @@ class StatusrohsController extends Controller
         $command = $connection->createCommand("SELECT * FROM statusrohs where month like '%". substr($ano,-2) ."' order by id asc");
 
         $result = $command->queryAll();
-        /*$html = '<div class="container table-responsive" style="width: 100%;">
+        $html = '<div class="container table-responsive" style="width: 100%;">
             
                     <table class="table  table-striped table-hover ">';
                 
@@ -110,12 +110,123 @@ class StatusrohsController extends Controller
             }
              $html .= '</th>';
         }
+        $html .= '</tr></thead>
+            <tbody>
+                <tr><td><b>Progress</b></td>';
 
-        $html .= '</table>
-                </div>';*/
+        for ($j=0; $j < 12; $j++) { 
+            $achou = false;
+            foreach ($result as $perk) {
+                if(substr($perk['month'],0,3) == $array[$j]){
+                    $html .= '<td style="text-align:center">
+                              <div class="progress" style = "margin-left: 16px; margin-right: 16px;">
+                                  <div class="progress-bar  " role="progressbar" style="color:#000000;background-color: #32f032;width:'. $this->getNumConcluido($perk['id']) .'%;" aria-valuenow="'. $this->getNumConcluido($perk['id']) .'" aria-valuemin="0" aria-valuemax="100">'.$this->getNumConcluido($perk['id']).'%</div>
+                              </div></td>';
+                    $achou = true;
+                    break;
+                }
+            }
+            if(!$achou){
+                $html .= '<td style="text-align:center">-</td>';
+            }
+        }
+
+        $html .= '</tr><tr><td><b>Plan</b></td>';
+
+        for ($j=0; $j < 12; $j++) { 
+            $achou = false;
+            foreach ($result as $perk) {
+                if(substr($perk['month'],0,3) == $array[$j]){
+                    $html .= '<td style="text-align:center">'. $this->getNumPlan($perk['id']) .'</td>';
+                    $achou = true;
+                    break;
+                }
+            }
+            if(!$achou){
+                $html .= '<td style="text-align:center">-</td>';
+            }
+        }
+
+        $html .= '</tr>';
+
+        $html .= '<tr><td><b>Result</b></td>';
+
+        for ($j=0; $j < 12; $j++) { 
+            $achou = false;
+            foreach ($result as $perk) {
+                if(substr($perk['month'],0,3) == $array[$j]){
+                    $html .= '<td style="text-align:center">'. $this->getNumResult($perk['id']) .'</td>';
+                    $achou = true;
+                    break;
+                }
+            }
+            if(!$achou){
+                $html .= '<td style="text-align:center">-</td>';
+            }
+        }
+
+        $html .= '</tr>';    
+
+        $html .= '<tr><td style="color: #32f032"><b>OK</b></td>';
+
+        for ($j=0; $j < 12; $j++) { 
+            $achou = false;
+            foreach ($result as $perk) {
+                if(substr($perk['month'],0,3) == $array[$j]){
+                    $html .= '<td style="text-align:center;color: #32f032"><b>'. $this->getNumOK($perk['id']) .'</b></td>';
+                    $achou = true;
+                    break;
+                }
+            }
+            if(!$achou){
+                $html .= '<td style="text-align:center;color: #32f032"><b>-</b></td>';
+            }
+        }
+
+        $html .= '</tr>'; 
+
+        $html .= '<tr><td style="color: #f00f0f"><b>NG</b></td>';
+
+        for ($j=0; $j < 12; $j++) { 
+            $achou = false;
+            foreach ($result as $perk) {
+                if(substr($perk['month'],0,3) == $array[$j]){
+                    $html .= '<td style="text-align:center;color: #f00f0f"><b>'. $this->getNumNG($perk['id']) .'</b></td>';
+                    $achou = true;
+                    break;
+                }
+            }
+            if(!$achou){
+                $html .= '<td style="text-align:center;color: #f00f0f"><b>-</b></td>';
+            }
+        }
+
+        $html .= '</tr>';
+
+        $html .= '<tr><td style="color: #f00f0f"><b>NG%</b></td>';
+
+        for ($j=0; $j < 12; $j++) { 
+            $achou = false;
+            foreach ($result as $perk) {
+                if(substr($perk['month'],0,3) == $array[$j]){
+                    $html .= '<td style="text-align:center;color: #f00f0f"><b>'. $this->getNumNGPorcentagem($perk['id']) .'%</b></td>';
+                    $achou = true;
+                    break;
+                }
+            }
+            if(!$achou){
+                $html .= '<td style="text-align:center;color: #f00f0f"><b>-</b></td>';
+            }
+        }
+
+        $html .= '</tr>';     
+
+        $html .= '</tbody></table>
+                </div>';
 
         
-        $html = '';
+        
+        /*$html = '';
         foreach ($result as $perk) {
             $html .= '<div class="col-sm-2">
                         <div class="thumbnail" style="width: 15rem;">
@@ -132,7 +243,7 @@ class StatusrohsController extends Controller
                         </div>
                      </div>';
             
-        }
+        }*/
 
         return $html;
     }
@@ -212,6 +323,53 @@ class StatusrohsController extends Controller
         }
 
         return $totalRealizado;
+    }
+
+    public function getNumOK($id){
+        $connection = Yii::$app->getDb();
+        $command = $connection->createCommand("SELECT COUNT(id) FROM item WHERE judge = 'O.K.'and statusrohs = " . $id);
+
+        $result = $command->queryAll();
+        foreach ($result as $perk) {
+            $totalOK = $perk['COUNT(id)'];
+            break;
+        }
+
+        return $totalOK;
+    }
+
+    public function getNumNG($id){
+        $connection = Yii::$app->getDb();
+        $command = $connection->createCommand("SELECT COUNT(id) FROM item WHERE judge = 'N.G.'and statusrohs = " . $id);
+
+        $result = $command->queryAll();
+        foreach ($result as $perk) {
+            $totalNG = $perk['COUNT(id)'];
+            break;
+        }
+
+        return $totalNG;
+    }
+
+    public function getNumNGPorcentagem($id){
+        $connection = Yii::$app->getDb();
+        $command = $connection->createCommand("SELECT COUNT(id) FROM item WHERE statusrohs = " . $id);
+
+        $result = $command->queryAll();
+        foreach ($result as $perk) {
+            $total = $perk['COUNT(id)'];
+            break;
+        }
+
+        $command = $connection->createCommand("SELECT COUNT(id) FROM item WHERE judge = 'N.G.' and statusrohs = " . $id);
+
+        $result = $command->queryAll();
+        foreach ($result as $perk) {
+            $totalRealizado = $perk['COUNT(id)'];
+            break;
+        }
+
+        return ceil((($totalRealizado*100)/$total));
     }
 
     public function getItems($id,$month){
