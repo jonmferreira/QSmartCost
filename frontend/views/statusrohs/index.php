@@ -105,6 +105,8 @@ $position = \yii\web\View::POS_READY;
 $this->registerJs($script, $position);
 $this->registerJsFile('https://www.gstatic.com/charts/loader.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
 
+
+
 ?>
 
 </br>

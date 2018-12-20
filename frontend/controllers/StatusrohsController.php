@@ -1,7 +1,5 @@
 <?php
-
 namespace frontend\controllers;
-
 use Yii;
 use yii\helpers\Json;
 use common\models\statusrohs;
@@ -84,7 +82,6 @@ class StatusrohsController extends Controller
     public function actionGetmonths($ano){
         $connection = Yii::$app->getDb();
         $command = $connection->createCommand("SELECT * FROM statusrohs where month like '%". substr($ano,-2) ."' order by id asc");
-
         $result = $command->queryAll();
         $html = '<div class="container table-responsive" style="width: 100%;">
             
@@ -94,27 +91,122 @@ class StatusrohsController extends Controller
                     <tr >
                         <th style="text-align:center"></th>
             ';
-
         $array = [
                 "JAN","FEV","MAR","ABR","MAI" ,"JUN","JUL","AGO","SET","OUT",
                 "NOV","DEZ"
             ];
-
         for ($j=0; $j < 12; $j++) { 
-            $html .= '<th style="text-align:center">'. $array[$j]. '\' '. substr($ano,-2);
+            $html .= '<th style="text-align:center">';
+            $achou = false;
             foreach ($result as $perk) {
                 if(substr($perk['month'],0,3) == $array[$j]){
-                    $html .= '';
+                    $html .= '<a href='. Url::to('?r=statusrohs/view&id='. $perk['id'] ) .' style = "color:#fff">'. $array[$j]. '\' '. substr($ano,-2) .'</a>';
+                    $achou = true;
                     break;
                 }
             }
-             $html .= '</th>';
+            if(!$achou){
+                $html .= $array[$j]. '\' '. substr($ano,-2);
+            }
+            $html .= '</th>';
+        }
+        $html .= '</tr></thead>
+            <tbody>
+                <tr><td><b>Progress</b></td>';
+        for ($j=0; $j < 12; $j++) { 
+            $achou = false;
+            foreach ($result as $perk) {
+                if(substr($perk['month'],0,3) == $array[$j]){
+                    $html .= '<td style="text-align:center">
+                              <div class="progress" style = "margin-left: 16px; margin-right: 16px;">
+                                  <div class="progress-bar  " role="progressbar" style="color:#000000;background-color: #32f032;width:'. $this->getNumConcluido($perk['id']) .'%;" aria-valuenow="'. $this->getNumConcluido($perk['id']) .'" aria-valuemin="0" aria-valuemax="100">'.$this->getNumConcluido($perk['id']).'%</div>
+                              </div></td>';
+                    $achou = true;
+                    break;
+                }
+            }
+            if(!$achou){
+                $html .= '<td style="text-align:center">-</td>';
+            }
+        }
+        $html .= '</tr><tr><td><b>Plan</b></td>';
+        for ($j=0; $j < 12; $j++) { 
+            $achou = false;
+            foreach ($result as $perk) {
+                if(substr($perk['month'],0,3) == $array[$j]){
+                    $html .= '<td style="text-align:center">'. $this->getNumPlan($perk['id']) .'</td>';
+                    $achou = true;
+                    break;
+                }
+            }
+            if(!$achou){
+                $html .= '<td style="text-align:center">-</td>';
+            }
         }
         $html .= '</tr>';
-
-        $html .= '</table>
+        $html .= '<tr><td><b>Result</b></td>';
+        for ($j=0; $j < 12; $j++) { 
+            $achou = false;
+            foreach ($result as $perk) {
+                if(substr($perk['month'],0,3) == $array[$j]){
+                    $html .= '<td style="text-align:center">'. $this->getNumResult($perk['id']) .'</td>';
+                    $achou = true;
+                    break;
+                }
+            }
+            if(!$achou){
+                $html .= '<td style="text-align:center">-</td>';
+            }
+        }
+        $html .= '</tr>';    
+        $html .= '<tr><td style="color: #32f032"><b>OK</b></td>';
+        for ($j=0; $j < 12; $j++) { 
+            $achou = false;
+            foreach ($result as $perk) {
+                if(substr($perk['month'],0,3) == $array[$j]){
+                    $html .= '<td style="text-align:center;color: #32f032"><b>'. $this->getNumOK($perk['id']) .'</b></td>';
+                    $achou = true;
+                    break;
+                }
+            }
+            if(!$achou){
+                $html .= '<td style="text-align:center;color: #32f032"><b>-</b></td>';
+            }
+        }
+        $html .= '</tr>'; 
+        $html .= '<tr><td style="color: #f00f0f"><b>NG</b></td>';
+        for ($j=0; $j < 12; $j++) { 
+            $achou = false;
+            foreach ($result as $perk) {
+                if(substr($perk['month'],0,3) == $array[$j]){
+                    $html .= '<td style="text-align:center;color: #f00f0f"><b>'. $this->getNumNG($perk['id']) .'</b></td>';
+                    $achou = true;
+                    break;
+                }
+            }
+            if(!$achou){
+                $html .= '<td style="text-align:center;color: #f00f0f"><b>-</b></td>';
+            }
+        }
+        $html .= '</tr>';
+        $html .= '<tr><td style="color: #f00f0f"><b>NG%</b></td>';
+        for ($j=0; $j < 12; $j++) { 
+            $achou = false;
+            foreach ($result as $perk) {
+                if(substr($perk['month'],0,3) == $array[$j]){
+                    $html .= '<td style="text-align:center;color: #f00f0f"><b>'. $this->getNumNGPorcentagem($perk['id']) .'%</b></td>';
+                    $achou = true;
+                    break;
+                }
+            }
+            if(!$achou){
+                $html .= '<td style="text-align:center;color: #f00f0f"><b>-</b></td>';
+            }
+        }
+        $html .= '</tr>';     
+        $html .= '</tbody></table>
                 </div>';
-
+        
         
         /*$html = '';
         foreach ($result as $perk) {
@@ -134,9 +226,9 @@ class StatusrohsController extends Controller
                      </div>';
             
         }*/
-
         return $html;
     }
+
 
     public function actionGetanos(){
         $connection = Yii::$app->getDb();
@@ -215,6 +307,53 @@ class StatusrohsController extends Controller
         return $totalRealizado;
     }
 
+    public function getNumOK($id){
+        $connection = Yii::$app->getDb();
+        $command = $connection->createCommand("SELECT COUNT(id) FROM item WHERE judge = 'O.K.'and statusrohs = " . $id);
+
+        $result = $command->queryAll();
+        foreach ($result as $perk) {
+            $totalOK = $perk['COUNT(id)'];
+            break;
+        }
+
+        return $totalOK;
+    }
+
+    public function getNumNG($id){
+        $connection = Yii::$app->getDb();
+        $command = $connection->createCommand("SELECT COUNT(id) FROM item WHERE judge = 'N.G.'and statusrohs = " . $id);
+
+        $result = $command->queryAll();
+        foreach ($result as $perk) {
+            $totalNG = $perk['COUNT(id)'];
+            break;
+        }
+
+        return $totalNG;
+    }
+
+    public function getNumNGPorcentagem($id){
+        $connection = Yii::$app->getDb();
+        $command = $connection->createCommand("SELECT COUNT(id) FROM item WHERE statusrohs = " . $id);
+
+        $result = $command->queryAll();
+        foreach ($result as $perk) {
+            $total = $perk['COUNT(id)'];
+            break;
+        }
+
+        $command = $connection->createCommand("SELECT COUNT(id) FROM item WHERE judge = 'N.G.' and statusrohs = " . $id);
+
+        $result = $command->queryAll();
+        foreach ($result as $perk) {
+            $totalRealizado = $perk['COUNT(id)'];
+            break;
+        }
+
+        return ceil((($totalRealizado*100)/$total));
+    }
+
     public function getItems($id,$month){
         $connection = Yii::$app->getDb();
 
@@ -233,7 +372,7 @@ class StatusrohsController extends Controller
             //$htm= '<table class="table table-bordered" ><tr>';
             $htm = '<thead style="background-color:#696969;color:#fff;">
                     <tr >
-                        <th style="text-align:center">Item</th><th>Judge</th>
+                        <th style="text-align:center; width:200px;padding:8px 0px 8px 0px;">Item</th><th>Judge</th>
             ';
 
             $dias_total = array();
@@ -241,7 +380,7 @@ class StatusrohsController extends Controller
             foreach ($list as $data) {
                 //print_r(substr($data,-3));
                 //if(!(substr($data,-3) == 'Sun' || substr($data,-3) == 'Sat')){
-                    $htm = $htm . '<th style="text-align:center">'. substr($data, -6,-4) .'</th>';
+                    $htm = $htm . '<th style="text-align:center;padding-left:5px; padding-right:5px;">'. substr($data, -6,-4) .'</th>';
                     //print_r($data." ");
                     array_push($dias_total,substr($data, -6,-4));
                     array_push($datas_total,substr($data,0,-4));
@@ -257,7 +396,7 @@ class StatusrohsController extends Controller
 
                 $datas_old_result = $command->queryAll();
 
-                $htm = $htm . '<tr><td><b><a style="font-size:16px;color:#000000;" class = "botao-item" href="'. Url::to('?r=item/view&id='. $item['id'] ) .'&idstatus='. $id .'">' . $item['nome'] . ' </a></b></td>';
+                $htm = $htm . '<tr><td style="min-width: 100px;max-width:150px;padding:8px 0px 8px 0px;"><b><a style="font-size:16px;color:#000000;" class = "botao-item" href="'. Url::to('?r=item/view&id='. $item['id'] ) .'&idstatus='. $id .'">' . $item['nome'] . ' </a></b></td>';
 
                 if($item['situacao'] == "REALIZADO"){
                     if($item['judge'] == "O.K."){  
@@ -278,39 +417,42 @@ class StatusrohsController extends Controller
                     if($datas_total[$i] == $item['data_teste']){
                         if($item['situacao'] == 'REALIZADO'){
                              $htm = $htm .'
-                                <td style="vertical-align:middle; ">
-                                    <button type="button" class="btn example-popover" styledata-container="body" style = "background-color: #32f032;height: 25px ;border-radius: 50px;" data-placement="top" data-content="">
+                                <td style="vertical-align:middle; padding:0px;">
+                                    <button type="button" class="btn example-popover" styledata-container="body" style = "background-color: #32f032;height: 25px; width:100%;border-radius: 50px;" data-placement="top" data-content="">
                                     </button>  
                                 </td>
                             ';
                         }else{
                             $htm = $htm .'
-                                <td style="vertical-align:middle; ">
-                                    <button type="button" class="btn btn-light example-popover" styledata-container="body" style = "height: 25px ;border-radius: 50px;" data-toggle="popover" data-placement="top" data-content="'. $item['comentario'] . '">
+                                <td style="vertical-align:middle; padding:0px;">
+                                    <button type="button" class="btn btn-light example-popover" styledata-container="body" style = "height: 25px ;width:100%;border-radius: 50px;" data-toggle="popover" data-placement="top" data-content="'. $item['comentario'] . '">
                                     </button>
                                 </td>
                             ';
                         }
                     }else{
+                        $achou = false;
                         foreach ($datas_old_result as $data_old) {
                             if($datas_total[$i] == $data_old['data_old']){
+                                $achou = true;
                                  $htm = $htm .'
-                                    <td style="">
-                                        <button type="button" class="btn example-popover" styledata-container="body" style = "height: 25px ;border-radius: 50px; background-color: #696969;" data-toggle="popover" data-placement="top" data-content="'. $data_old['comentario'] . '">
+                                    <td style="vertical-align:middle;padding:0px;">
+                                        <button type="button" class="btn example-popover" styledata-container="body" style = "height: 25px ;width:100%;border-radius: 50px; background-color: #696969;" data-toggle="popover" data-placement="top" data-content="'. $data_old['comentario'] . '">
                                         </button>
                                     </td>
                                 ';
                                 break;
                             }
                         }
-                        $htm = $htm .'
-                            <td>
-
-                                
-                            </td>
-                        ';
+                        if(!$achou){
+                            $htm = $htm .'
+                                <td>
+                                </td>
+                            ';
+                        }
+                        
                     }
-                    $i = $i + 1;
+                    $i++;
                 }
                 $htm = $htm . '</tr>';
             }
