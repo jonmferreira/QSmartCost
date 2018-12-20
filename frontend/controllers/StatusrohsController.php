@@ -101,14 +101,21 @@ class StatusrohsController extends Controller
             ];
 
         for ($j=0; $j < 12; $j++) { 
-            $html .= '<th style="text-align:center">'. $array[$j]. '\' '. substr($ano,-2);
+            $html .= '<th style="text-align:center">';
+            $achou = false;
             foreach ($result as $perk) {
                 if(substr($perk['month'],0,3) == $array[$j]){
-                    $html .= '';
+
+                    $html .= '<a href='. Url::to('?r=statusrohs/view&id='. $perk['id'] ) .' style = "color:#fff">'. $array[$j]. '\' '. substr($ano,-2) .'</a>';
+                    $achou = true;
                     break;
                 }
             }
-             $html .= '</th>';
+            if(!$achou){
+                $html .= $array[$j]. '\' '. substr($ano,-2);
+            }
+
+            $html .= '</th>';
         }
         $html .= '</tr></thead>
             <tbody>
