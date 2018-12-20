@@ -397,7 +397,7 @@ class StatusrohsController extends Controller
             //$htm= '<table class="table table-bordered" ><tr>';
             $htm = '<thead style="background-color:#696969;color:#fff;">
                     <tr >
-                        <th style="text-align:center">Item</th><th>Judge</th>
+                        <th style="text-align:center; width:200px;padding:8px 0px 8px 0px;">Item</th><th>Judge</th>
             ';
 
             $dias_total = array();
@@ -405,7 +405,7 @@ class StatusrohsController extends Controller
             foreach ($list as $data) {
                 //print_r(substr($data,-3));
                 //if(!(substr($data,-3) == 'Sun' || substr($data,-3) == 'Sat')){
-                    $htm = $htm . '<th style="text-align:center">'. substr($data, -6,-4) .'</th>';
+                    $htm = $htm . '<th style="text-align:center;padding-left:5px; padding-right:5px;">'. substr($data, -6,-4) .'</th>';
                     //print_r($data." ");
                     array_push($dias_total,substr($data, -6,-4));
                     array_push($datas_total,substr($data,0,-4));
@@ -421,7 +421,7 @@ class StatusrohsController extends Controller
 
                 $datas_old_result = $command->queryAll();
 
-                $htm = $htm . '<tr><td><b><a style="font-size:16px;color:#000000;" class = "botao-item" href="'. Url::to('?r=item/view&id='. $item['id'] ) .'&idstatus='. $id .'">' . $item['nome'] . ' </a></b></td>';
+                $htm = $htm . '<tr><td style="min-width: 100px;max-width:150px;padding:8px 0px 8px 0px;"><b><a style="font-size:16px;color:#000000;" class = "botao-item" href="'. Url::to('?r=item/view&id='. $item['id'] ) .'&idstatus='. $id .'">' . $item['nome'] . ' </a></b></td>';
 
                 if($item['situacao'] == "REALIZADO"){
                     if($item['judge'] == "O.K."){  
@@ -442,39 +442,42 @@ class StatusrohsController extends Controller
                     if($datas_total[$i] == $item['data_teste']){
                         if($item['situacao'] == 'REALIZADO'){
                              $htm = $htm .'
-                                <td style="vertical-align:middle; ">
-                                    <button type="button" class="btn example-popover" styledata-container="body" style = "background-color: #32f032;height: 25px ;border-radius: 50px;" data-placement="top" data-content="">
+                                <td style="vertical-align:middle; padding:0px;">
+                                    <button type="button" class="btn example-popover" styledata-container="body" style = "background-color: #32f032;height: 25px; width:100%;border-radius: 50px;" data-placement="top" data-content="">
                                     </button>  
                                 </td>
                             ';
                         }else{
                             $htm = $htm .'
-                                <td style="vertical-align:middle; ">
-                                    <button type="button" class="btn btn-light example-popover" styledata-container="body" style = "height: 25px ;border-radius: 50px;" data-toggle="popover" data-placement="top" data-content="'. $item['comentario'] . '">
+                                <td style="vertical-align:middle; padding:0px;">
+                                    <button type="button" class="btn btn-light example-popover" styledata-container="body" style = "height: 25px ;width:100%;border-radius: 50px;" data-toggle="popover" data-placement="top" data-content="'. $item['comentario'] . '">
                                     </button>
                                 </td>
                             ';
                         }
                     }else{
+                        $achou = false;
                         foreach ($datas_old_result as $data_old) {
                             if($datas_total[$i] == $data_old['data_old']){
+                                $achou = true;
                                  $htm = $htm .'
-                                    <td style="">
-                                        <button type="button" class="btn example-popover" styledata-container="body" style = "height: 25px ;border-radius: 50px; background-color: #696969;" data-toggle="popover" data-placement="top" data-content="'. $data_old['comentario'] . '">
+                                    <td style="vertical-align:middle;padding:0px;">
+                                        <button type="button" class="btn example-popover" styledata-container="body" style = "height: 25px ;width:100%;border-radius: 50px; background-color: #696969;" data-toggle="popover" data-placement="top" data-content="'. $data_old['comentario'] . '">
                                         </button>
                                     </td>
                                 ';
                                 break;
                             }
                         }
-                        $htm = $htm .'
-                            <td>
-
-                                
-                            </td>
-                        ';
+                        if(!$achou){
+                            $htm = $htm .'
+                                <td>
+                                </td>
+                            ';
+                        }
+                        
                     }
-                    $i = $i + 1;
+                    $i++;
                 }
                 $htm = $htm . '</tr>';
             }

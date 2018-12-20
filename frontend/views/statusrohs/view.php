@@ -122,10 +122,9 @@ $this->registerJs($script, $position);
 			 ?>	
 			
 
-		<div class="table-responsive" style="width: 100%;">
-	        <input type="button" id="gerar_dias" value="Click" style="display: none;"> 
-	        <br>
-	        <table id="days-header" class="table  table-striped table-hover ">
+		<div class="table-responsive" style=" overflow: hidden;">
+	        
+	        <table id="days-header" class="table table-striped table-hover " style="overflow: hidden;">
 	            <?php echo $items?>
 	        </table>
 	    </div>
