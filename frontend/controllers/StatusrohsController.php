@@ -86,7 +86,7 @@ class StatusrohsController extends Controller
         $command = $connection->createCommand("SELECT * FROM statusrohs where month like '%". substr($ano,-2) ."' order by id asc");
 
         $result = $command->queryAll();
-        /*$html = '<div class="container table-responsive" style="width: 100%;">
+        $html = '<div class="container table-responsive" style="width: 100%;">
             
                     <table class="table  table-striped table-hover ">';
                 
@@ -110,12 +110,13 @@ class StatusrohsController extends Controller
             }
              $html .= '</th>';
         }
+        $html .= '</tr>';
 
         $html .= '</table>
-                </div>';*/
+                </div>';
 
         
-        $html = '';
+        /*$html = '';
         foreach ($result as $perk) {
             $html .= '<div class="col-sm-2">
                         <div class="thumbnail" style="width: 15rem;">
@@ -132,7 +133,7 @@ class StatusrohsController extends Controller
                         </div>
                      </div>';
             
-        }
+        }*/
 
         return $html;
     }

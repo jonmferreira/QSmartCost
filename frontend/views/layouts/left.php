@@ -79,10 +79,8 @@ if(Yii::$app->user->isGuest){
 					[
 						'label' => 'XRF',
                         'icon' => 'fa fa-reorder',
-                        'url' => '#',
-                        'items' => [
-                            ['label' => 'Status RoHS', 'icon' => 'fa fa-info-circle', 'url' => ['/statusrohs/index']]
-                        ],
+                        'url' => ['/statusrohs/index']
+                        
 					],
                     [ 'label' => 'Goals Plan', 'icon' => 'fa fa-search', 'url' => '#',],
                     ['label' => 'QHI Board', 'icon' => 'fa fa-check-square-o', 'url' => '#'],
