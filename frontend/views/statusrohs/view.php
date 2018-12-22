@@ -5,7 +5,8 @@ use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\statusrohs */
-$this->title = str_replace("'","' ",$model->month);
+//$this->title = str_replace("'","' ",$model->month);
+$this->title = $model->month;
 $this->params['breadcrumbs'][] = ['label' => 'StatusRoHS', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 
@@ -41,8 +42,7 @@ $script = <<< JS
 
 JS;
 $position = \yii\web\View::POS_READY;
-$this->registerJs($script, $position);	
-
+$this->registerJs($script, $position);		
 ?>
 </br>
 <div class="statusrohs-view">
@@ -75,8 +75,6 @@ $this->registerJs($script, $position);
 
 		</p>
 
-
-
 		<?php /*if($model->status == 'NG'){
 				echo DetailView::widget([
 				'model' => $model,
@@ -102,6 +100,7 @@ $this->registerJs($script, $position);
 				],
 			  ]);
 			}*/
+
 			echo '<h5 style="display:inline;"><b>Plan: </b></h5> <p style="display:inline;">'. $numPlan .'</p>&ensp;&ensp;';
 
 			echo '<h5 style="display:inline;"><b>Result: </b></h5><p style="display:inline;">'. $numResult .'</p>';
@@ -119,12 +118,13 @@ $this->registerJs($script, $position);
             echo '<div style="display:inline-block;float:right;"> 
 					<button type="button" class="btn example-popover" styledata-container="body" style = "background-color: #32f032;height: 25px ;border-radius: 50px;" data-placement="top" data-content="">
                     </button>&ensp;Realizado&ensp;&ensp;</div>';
+            
 			 ?>	
-			
+
 
 		<div class="table-responsive" style=" overflow: hidden;">
 	        
-	        <table id="days-header" class="table table-striped table-hover " style="overflow: hidden;">
+	        <table id="days-header" class="table table-striped table-hover header-fixed" style="overflow: hidden;">
 	            <?php echo $items?>
 	        </table>
 	    </div>

@@ -89,30 +89,30 @@ class StatusrohsController extends Controller
                 
         $html .= '<thead style="background-color:#696969;color:#fff;">
                     <tr >
-                        <th style="text-align:center"></th>
+                        <th style="text-align:center;padding-top:14px;padding-bottom:14px; vertical-align:middle;"></th>
             ';
         $array = [
                 "JAN","FEV","MAR","ABR","MAI" ,"JUN","JUL","AGO","SET","OUT",
                 "NOV","DEZ"
             ];
         for ($j=0; $j < 12; $j++) { 
-            $html .= '<th style="text-align:center">';
+            $html .= '<th style="text-align:center;padding-top:14px;padding-bottom:14px; vertical-align:middle;">';
             $achou = false;
             foreach ($result as $perk) {
                 if(substr($perk['month'],0,3) == $array[$j]){
-                    $html .= '<a href='. Url::to('?r=statusrohs/view&id='. $perk['id'] ) .' style = "color:#fff">'. $array[$j]. '\' '. substr($ano,-2) .'</a>';
+                    $html .= '<a href='. Url::to('?r=statusrohs/view&id='. $perk['id'] ) .' style = "color:#fff">'. $array[$j]. '\''. substr($ano,-2) .'</a>';
                     $achou = true;
                     break;
                 }
             }
             if(!$achou){
-                $html .= $array[$j]. '\' '. substr($ano,-2);
+                $html .= $array[$j]. '\''. substr($ano,-2);
             }
             $html .= '</th>';
         }
         $html .= '</tr></thead>
             <tbody>
-                <tr><td><b>Progress</b></td>';
+                <tr><td style="font-size:16px;padding-top:14px;padding-bottom:14px;"><b>Progress</b></td>';
         for ($j=0; $j < 12; $j++) { 
             $achou = false;
             foreach ($result as $perk) {
@@ -129,7 +129,7 @@ class StatusrohsController extends Controller
                 $html .= '<td style="text-align:center">-</td>';
             }
         }
-        $html .= '</tr><tr><td><b>Plan</b></td>';
+        $html .= '</tr><tr><td style="font-size:16px;padding-top:14px;padding-bottom:14px;"><b>Plan</b></td>';
         for ($j=0; $j < 12; $j++) { 
             $achou = false;
             foreach ($result as $perk) {
@@ -144,7 +144,7 @@ class StatusrohsController extends Controller
             }
         }
         $html .= '</tr>';
-        $html .= '<tr><td><b>Result</b></td>';
+        $html .= '<tr><td style="font-size:16px;padding-top:14px;padding-bottom:14px;"><b>Result</b></td>';
         for ($j=0; $j < 12; $j++) { 
             $achou = false;
             foreach ($result as $perk) {
@@ -159,7 +159,7 @@ class StatusrohsController extends Controller
             }
         }
         $html .= '</tr>';    
-        $html .= '<tr><td style="color: #32f032"><b>OK</b></td>';
+        $html .= '<tr><td style="color: #32f032;font-size:16px;padding-top:14px;padding-bottom:14px;"><b>OK</b></td>';
         for ($j=0; $j < 12; $j++) { 
             $achou = false;
             foreach ($result as $perk) {
@@ -174,7 +174,7 @@ class StatusrohsController extends Controller
             }
         }
         $html .= '</tr>'; 
-        $html .= '<tr><td style="color: #f00f0f"><b>NG</b></td>';
+        $html .= '<tr><td style="color: #f00f0f;font-size:16px;padding-top:14px;padding-bottom:14px;"><b>NG</b></td>';
         for ($j=0; $j < 12; $j++) { 
             $achou = false;
             foreach ($result as $perk) {
@@ -189,7 +189,7 @@ class StatusrohsController extends Controller
             }
         }
         $html .= '</tr>';
-        $html .= '<tr><td style="color: #f00f0f"><b>NG%</b></td>';
+        $html .= '<tr><td style="color: #f00f0f;font-size:16px;padding-top:14px;padding-bottom:14px;"><b>NG%</b></td>';
         for ($j=0; $j < 12; $j++) { 
             $achou = false;
             foreach ($result as $perk) {
@@ -372,7 +372,7 @@ class StatusrohsController extends Controller
             //$htm= '<table class="table table-bordered" ><tr>';
             $htm = '<thead style="background-color:#696969;color:#fff;">
                     <tr >
-                        <th style="text-align:center; width:200px;padding:8px 0px 8px 0px;">Item</th><th>Judge</th>
+                        <th style="text-align:center; width:200px;padding:8px 0px 8px 0px;">Item</th><th style="text-align:center;">Judge</th>
             ';
 
             $dias_total = array();

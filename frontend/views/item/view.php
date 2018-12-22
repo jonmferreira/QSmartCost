@@ -34,12 +34,12 @@ $this->params['breadcrumbs'][] = $this->title;
             }
 
             if($model->situacao == 'REALIZADO' ){
-                echo DetailView::widget([
+                echo '<b>' . DetailView::widget([
                 'model' => $model,
                 'attributes' => [
                     'part_number'
                 ],
-              ]);
+              ]) . '</b>';
             }
             /*else{
                 echo DetailView::widget([

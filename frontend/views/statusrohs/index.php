@@ -61,20 +61,7 @@ $script = <<< JS
             	alert(thrownError);
             }
           }); 
-        /*var path = '?r=statusrohs/getmonthschart&ano=';
-        var path = path.concat($('select').val());
-        $.ajax({
-            url: path,
-            type: 'get',
-            success: function (data) {
-            	var lista = JSON.parse(data);
-            	
-            	drawChart(lista);
-            },
-            error: function(xhr, ajaxOptions, thrownError){
-            	alert(thrownError);
-            }
-        }); */
+       
    });
 
 
