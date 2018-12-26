@@ -39,10 +39,26 @@ $script = <<< JS
           });*/
 
   });
+  var th = $('.table-fixed').find('thead th');
+	$('.table-fixed').on('scroll', function() {
+	  th.css('transform', 'translateY('+ this.scrollTop +'px)');
+	});
 
 JS;
 $position = \yii\web\View::POS_READY;
-$this->registerJs($script, $position);		
+$this->registerJs($script, $position);	
+$this->registerCss('
+
+
+.table-fixed { overflow-y: auto; height: 450px; }
+
+/* Just common table stuff. */
+table  { border-collapse: collapse; width: 100%; }
+th, td { padding: 8px 16px; }
+
+th     { background-color:#696969;color:#fff; }
+
+');	
 ?>
 </br>
 <div class="statusrohs-view">
@@ -121,13 +137,11 @@ $this->registerJs($script, $position);
             
 			 ?>	
 
-
-		<div class="table-responsive" style=" overflow: hidden;">
-	        
-	        <table id="days-header" class="table table-striped table-hover header-fixed" style="overflow: hidden;">
+	    <div class="table-fixed">    
+	        <table id="days-header" class="table  table-striped table-hover">
 	            <?php echo $items?>
 	        </table>
-	    </div>
+	    </div>	
 		
 	</div>
 
