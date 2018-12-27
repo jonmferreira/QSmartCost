@@ -50,7 +50,7 @@ $this->registerJs($script, $position);
 $this->registerCss('
 
 
-.table-fixed { overflow-y: auto; height: 450px; }
+.table-fixed { overflow-y: auto; height: 400px; }
 
 /* Just common table stuff. */
 table  { border-collapse: collapse; width: 100%; }
